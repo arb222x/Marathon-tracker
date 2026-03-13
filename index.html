@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>MarathonTracker.gg</title>
+<title>Marathon Tracker</title>
 
 <style>
 
@@ -22,20 +22,23 @@ width:100%;
 background:#111;
 border-bottom:1px solid #222;
 display:flex;
-justify-content:space-between;
-padding:15px 40px;
+justify-content:center;
+align-items:center;
+padding:15px 0;
+z-index:10;
 }
 
-.logo{
-color:#00ff9c;
-font-weight:bold;
-font-size:20px;
+/* NAV LINKS */
+
+.navlinks{
+display:flex;
+gap:40px;
 }
 
 .navlinks a{
 color:#aaa;
-margin-left:20px;
 text-decoration:none;
+font-size:14px;
 }
 
 .navlinks a:hover{
@@ -55,23 +58,33 @@ padding-top:180px;
 
 .title{
 font-size:64px;
+letter-spacing:4px;
 color:#00ff9c;
-text-shadow:0 0 15px #00ff9c;
+text-shadow:0 0 15px #00ff9c,0 0 35px #00ff9c;
+margin-bottom:10px;
 }
 
+.subtitle{
+color:#aaa;
+margin-bottom:40px;
+}
+
+/* SEARCH */
+
 .searchBox{
-margin-top:30px;
 display:flex;
 gap:10px;
 }
 
 input{
 padding:14px;
+font-size:18px;
+border-radius:8px;
+border:none;
 width:260px;
 background:#1a1a1a;
-border:none;
-border-radius:8px;
 color:white;
+outline:none;
 }
 
 button{
@@ -81,11 +94,15 @@ padding:14px 20px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+transition:.2s;
 }
 
 button:hover{
 background:#00d683;
+transform:scale(1.05);
 }
+
+/* FOOTER */
 
 .footer{
 text-align:center;
@@ -102,8 +119,6 @@ padding:40px;
 
 <div class="navbar">
 
-<div class="logo">MarathonTracker.gg</div>
-
 <div class="navlinks">
 <a href="/">Home</a>
 <a href="recent.html">Recently Searched</a>
@@ -117,7 +132,7 @@ padding:40px;
 
 <h1 class="title">MARATHON TRACKER GG</h1>
 
-<p>Track stats, weapons and extractions</p>
+<p class="subtitle">Track stats, weapons and extractions</p>
 
 <div class="searchBox">
 
