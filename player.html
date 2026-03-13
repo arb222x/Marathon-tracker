@@ -14,6 +14,9 @@ body {
   font-weight: 600;
   background: #020304;
   color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* NAVBAR */
@@ -43,8 +46,11 @@ body {
 
 /* HERO / PLAYER STATS */
 .hero {
-  text-align: center;
-  margin-top: 100px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -53,21 +59,15 @@ body {
   color: #00ff9c;
   text-shadow: 0 0 20px #00ff9c;
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.subtitle {
-  opacity: .7;
-  margin-bottom: 40px;
-}
-
-/* PLAYER STATS BOX */
 .stats-box {
-  width: 500px;
-  margin: 0 auto;
+  width: 400px;
   background: #0b0f14;
-  padding: 20px;
+  padding: 25px 20px;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 156, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 156, 0.4);
   text-align: left;
   color: #00ff9c;
   font-weight: 800;
@@ -75,24 +75,23 @@ body {
 
 .stats-box h2 {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 28px;
   text-align: center;
   text-shadow: 0 0 12px #00ff9c;
 }
 
 .stats-box p {
-  margin: 6px 0;
+  margin: 8px 0;
+  font-size: 16px;
 }
 
 /* FOOTER */
 .footer {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
   text-align: center;
   font-size: 12px;
   opacity: .5;
+  padding: 10px;
 }
 
 .footer:hover {
@@ -120,7 +119,6 @@ body {
 <!-- HERO -->
 <div class="hero">
   <div class="title" id="playerNameTitle">Player Name</div>
-  <div class="subtitle">Marathon Stats</div>
   
   <div class="stats-box" id="statsBox">
     <h2>Stats Overview</h2>
@@ -139,7 +137,7 @@ body {
 
 <script src="app.js"></script>
 <script>
-// Example: fill stats dynamically after search
+// Example: dynamically fill stats from user search
 function displayPlayerStats(playerData) {
   document.getElementById('playerNameTitle').textContent = playerData.username;
   document.getElementById('kills').textContent = playerData.kills;
@@ -150,7 +148,7 @@ function displayPlayerStats(playerData) {
   document.getElementById('extraction').textContent = playerData.extractionRate + '%';
 }
 
-// Example usage with dummy data (replace with Bungie API fetch)
+// Example dummy data
 displayPlayerStats({
   username: "Runner123",
   kills: 256,
