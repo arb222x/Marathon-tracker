@@ -17,6 +17,33 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND IMAGE */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px) brightness(15%);
+  z-index: -2;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .75);
+  z-index: -1;
 }
 
 /* NAVBAR */
@@ -25,6 +52,8 @@ body {
   align-items: center;
   padding: 20px 40px;
   font-weight: 800;
+  position: relative;
+  z-index: 1;
 }
 
 .nav a {
@@ -51,6 +80,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
@@ -63,11 +94,11 @@ body {
 }
 
 .stats-box {
-  width: 400px;
+  width: 600px;
   background: #0b0f14;
-  padding: 25px 20px;
+  padding: 30px 25px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 156, 0.4);
+  box-shadow: 0 0 25px rgba(0, 255, 156, 0.4);
   text-align: left;
   color: #00ff9c;
   font-weight: 800;
@@ -75,15 +106,15 @@ body {
 
 .stats-box h2 {
   margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 28px;
+  margin-bottom: 20px;
+  font-size: 32px;
   text-align: center;
-  text-shadow: 0 0 12px #00ff9c;
+  text-shadow: 0 0 15px #00ff9c;
 }
 
 .stats-box p {
-  margin: 8px 0;
-  font-size: 16px;
+  margin: 10px 0;
+  font-size: 18px;
 }
 
 /* FOOTER */
@@ -92,6 +123,8 @@ body {
   font-size: 12px;
   opacity: .5;
   padding: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .footer:hover {
@@ -104,6 +137,9 @@ body {
 </head>
 
 <body>
+
+<div class="background"></div>
+<div class="overlay"></div>
 
 <!-- NAVIGATION -->
 <div class="nav">
@@ -122,12 +158,20 @@ body {
   
   <div class="stats-box" id="statsBox">
     <h2>Stats Overview</h2>
+    <p>Username: <span id="username">Player123</span></p>
+    <p>Score: <span id="score">0</span></p>
     <p>Kills: <span id="kills">0</span></p>
     <p>Deaths: <span id="deaths">0</span></p>
+    <p>K/D Ratio: <span id="kd">0</span></p>
     <p>Matches Played: <span id="matches">0</span></p>
+    <p>Wins: <span id="wins">0</span></p>
+    <p>Losses: <span id="losses">0</span></p>
     <p>Top Weapon: <span id="topWeapon">None</span></p>
+    <p>Favorite Weapon: <span id="favWeapon">None</span></p>
     <p>Favorite Map: <span id="favoriteMap">None</span></p>
     <p>Extraction Rate: <span id="extraction">0%</span></p>
+    <p>Longest Streak: <span id="streak">0</span></p>
+    <p>Total Time Played: <span id="timePlayed">0h</span></p>
   </div>
 </div>
 
@@ -140,23 +184,37 @@ body {
 // Example: dynamically fill stats from user search
 function displayPlayerStats(playerData) {
   document.getElementById('playerNameTitle').textContent = playerData.username;
+  document.getElementById('username').textContent = playerData.username;
+  document.getElementById('score').textContent = playerData.score;
   document.getElementById('kills').textContent = playerData.kills;
   document.getElementById('deaths').textContent = playerData.deaths;
+  document.getElementById('kd').textContent = (playerData.kills / Math.max(playerData.deaths,1)).toFixed(2);
   document.getElementById('matches').textContent = playerData.matches;
+  document.getElementById('wins').textContent = playerData.wins;
+  document.getElementById('losses').textContent = playerData.losses;
   document.getElementById('topWeapon').textContent = playerData.topWeapon;
+  document.getElementById('favWeapon').textContent = playerData.favoriteWeapon;
   document.getElementById('favoriteMap').textContent = playerData.favoriteMap;
   document.getElementById('extraction').textContent = playerData.extractionRate + '%';
+  document.getElementById('streak').textContent = playerData.longestStreak;
+  document.getElementById('timePlayed').textContent = playerData.totalTimePlayed + 'h';
 }
 
 // Example dummy data
 displayPlayerStats({
   username: "Runner123",
+  score: 15200,
   kills: 256,
   deaths: 120,
   matches: 45,
+  wins: 20,
+  losses: 25,
   topWeapon: "Bolt Rifle",
+  favoriteWeapon: "Laser Rifle",
   favoriteMap: "Perimeter",
-  extractionRate: 78
+  extractionRate: 78,
+  longestStreak: 12,
+  totalTimePlayed: 85
 });
 </script>
 
