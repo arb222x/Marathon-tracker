@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
 <title>Marathon Tracker</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,101 +9,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
 <style>
-
-body{
-  margin:0;
-  font-family:'Orbitron',sans-serif;
-  font-weight:600;
-  background:#020304;
-  color:white;
-  position:relative;
-  overflow-x:hidden;
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  background: #020304;
+  color: white;
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* BACKGROUND IMAGE */
-.background{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-image:url("background.jpg");
-  background-size:cover;
-  background-position:center;
-  filter:blur(10px) brightness(15%);
-  z-index:-3;
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px) brightness(15%);
+  z-index: -3;
 }
 
 /* DARK OVERLAY */
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.75);
-  z-index:-2;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .75);
+  z-index: -2;
 }
 
-/* FULL SCREEN RANDOM LIGHTNING GREEN GLOW */
+/* FULL SCREEN GREEN LIGHTNING GLOW - slower and softer */
 body::before {
-  content:"";
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: radial-gradient(circle at center, rgba(0,255,156,0.12) 0%, rgba(0,255,156,0) 70%);
-  pointer-events:none;
-  z-index:-1;
-  animation: lightning 4s infinite;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 255, 156, 0.08) 0%, rgba(0, 255, 156, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+  animation: lightning 6s infinite;
 }
 
 @keyframes lightning {
-  0%, 100% { opacity: 0.05; }
-  5% { opacity: 0.25; }
-  10% { opacity: 0.05; }
-  20% { opacity: 0.18; }
-  30% { opacity: 0.05; }
-  50% { opacity: 0.22; }
-  60% { opacity: 0.05; }
-  75% { opacity: 0.15; }
-  85% { opacity: 0.05; }
+  0%, 100% { opacity: 0.03; }
+  5% { opacity: 0.12; }
+  10% { opacity: 0.03; }
+  20% { opacity: 0.08; }
+  30% { opacity: 0.03; }
+  50% { opacity: 0.10; }
+  60% { opacity: 0.03; }
+  75% { opacity: 0.07; }
+  85% { opacity: 0.03; }
 }
 
 /* NAVBAR */
-.nav{
-  display:flex;
-  justify-content:flex-start;
-  padding:25px 60px;
-  font-weight:800;
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  padding: 25px 60px;
+  font-weight: 800;
 }
 
-.nav a{
-  text-decoration:none;
-  margin-right:35px;
-  color:white;
-  transition:.25s;
+.nav a {
+  text-decoration: none;
+  margin-right: 35px;
+  color: white;
+  transition: .25s;
 }
 
-.nav a:hover{
-  color:#00ff9c;
-  text-shadow:0 0 12px #00ff9c;
+.nav a:hover {
+  color: #00ff9c;
+  text-shadow: 0 0 12px #00ff9c;
 }
 
 /* HERO */
-.hero{
-  text-align:center;
-  margin-top:150px;
+.hero {
+  text-align: center;
+  margin-top: 150px;
 }
 
-.title{
-  font-size:80px;
-  letter-spacing:8px;
-  color:#00ff9c;
-  text-shadow:0 0 25px #00ff9c;
+.title {
+  font-size: 80px;
+  letter-spacing: 8px;
+  color: #00ff9c;
+  text-shadow: 0 0 25px #00ff9c;
 
-  /* BOUNCE ANIMATION */
   animation: bounceTitle 1s ease;
 }
 
@@ -116,84 +113,89 @@ body::before {
   100% { transform: translateY(0); }
 }
 
-.subtitle{
-  opacity:.7;
-  margin-top:10px;
+.subtitle {
+  opacity: .7;
+  margin-top: 10px;
 }
 
 /* SEARCH */
-.search-container{
-  margin-top:50px;
-  display:flex;
-  justify-content:center;
+.search-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.search{
-  display:flex;
-  width:500px;
-  border-radius:12px;
-  overflow:hidden;
-  background:#0b0f14;
-  box-shadow:0 0 10px rgba(0,255,156,0.2);
+.search {
+  display: flex;
+  width: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b0f14;
+  box-shadow: 0 0 10px rgba(0, 255, 156, 0.2);
   transition: all 0.3s ease;
 }
 
-.search:hover{
-  box-shadow:0 0 25px #00ff9c;
+.search:hover {
+  box-shadow: 0 0 25px #00ff9c;
   transform: translateY(-2px);
 }
 
-.search input{
-  flex:1;
-  padding:16px;
-  background:transparent;
-  border:none;
-  color:white;
-  outline:none;
+.search input {
+  flex: 1;
+  padding: 16px;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
 }
 
-.search button{
-  padding:16px 25px;
-  border:none;
-  background:#00ff9c;
-  font-weight:800;
-  cursor:pointer;
+.search button {
+  padding: 16px 25px;
+  border: none;
+  background: #00ff9c;
+  font-weight: 800;
+  cursor: pointer;
 }
 
-.search button:hover{
-  box-shadow:0 0 15px #00ff9c;
+.search button:hover {
+  box-shadow: 0 0 15px #00ff9c;
 }
 
-/* STATS DISPLAY - SMALLER WIDTH TO MATCH SEARCH BOX */
-#statsDisplay{
-  margin-top:30px;
-  width:500px;               /* match search box width */
-  margin-left:auto;
-  margin-right:auto;
-  background:#0b0f14;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 0 15px rgba(0,255,156,0.4);
-  text-align:left;
-  color:#00ff9c;
-  font-weight:800;
-  overflow-x:auto;
-  transition: box-shadow 0.3s ease;
+/* STATS DISPLAY - smaller and glow on error */
+#statsDisplay {
+  margin-top: 30px;
+  width: 500px; /* same as search box */
+  margin-left: auto;
+  margin-right: auto;
+  background: #0b0f14;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 156, 0.3);
+  text-align: center;
+  color: #00ff9c;
+  font-weight: 800;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+#statsDisplay.error {
+  background: #330000;
+  box-shadow: 0 0 20px #ff0000;
+  color: #ff4444;
 }
 
 /* FOOTER */
-.footer{
-  position:fixed;
-  bottom:20px;
-  width:100%;
-  text-align:center;
-  font-size:12px;
-  opacity:.5;
+.footer {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  opacity: .5;
 }
 
-.footer:hover{
-  opacity:.9;
-  text-shadow:0 0 10px #00ff9c;
+.footer:hover {
+  opacity: .9;
+  text-shadow: 0 0 10px #00ff9c;
 }
 
 </style>
