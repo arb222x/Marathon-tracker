@@ -7,6 +7,7 @@ async function searchPlayer() {
     
     if (!username) {
         display.innerHTML = "Please enter a runner name.";
+        glowError(display);
         return;
     }
 
@@ -28,11 +29,12 @@ async function searchPlayer() {
         const data = await response.json();
         console.log(data);
 
-        // Simple card output (you can later style nicely)
+        // Display stats in the box with green glow
         display.innerHTML = `
           <strong>Runner:</strong> ${username}<br>
           <pre>${JSON.stringify(data, null, 2)}</pre>
         `;
+        glowSuccess(display);
 
         // Store in localStorage for "recent runners"
         let recent = JSON.parse(localStorage.getItem("recentRunners") || "[]");
@@ -45,5 +47,22 @@ async function searchPlayer() {
     } catch (err) {
         console.error(err);
         display.innerHTML = err.message;
+        glowError(display);
     }
+}
+
+// Glow green for success
+function glowSuccess(el){
+    el.style.boxShadow = "0 0 25px #00ff9c";
+    setTimeout(()=> {
+        el.style.boxShadow = "0 0 15px rgba(0,255,156,0.4)";
+    }, 1000);
+}
+
+// Glow red for error
+function glowError(el){
+    el.style.boxShadow = "0 0 25px #ff0033";
+    setTimeout(()=> {
+        el.style.boxShadow = "0 0 15px rgba(0,255,156,0.4)";
+    }, 1000);
 }
