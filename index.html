@@ -2,116 +2,10 @@
 <html>
 
 <head>
+
 <title>Marathon Tracker</title>
 
-<style>
-
-body{
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-margin:0;
-}
-
-/* NAVBAR */
-
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-background:#111;
-border-bottom:1px solid #222;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:15px 0;
-z-index:10;
-}
-
-/* NAV LINKS */
-
-.navlinks{
-display:flex;
-gap:40px;
-}
-
-.navlinks a{
-color:#aaa;
-text-decoration:none;
-font-size:14px;
-}
-
-.navlinks a:hover{
-color:#00ff9c;
-}
-
-/* HERO */
-
-.hero{
-height:80vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-padding-top:180px;
-}
-
-.title{
-font-size:64px;
-letter-spacing:4px;
-color:#00ff9c;
-text-shadow:0 0 15px #00ff9c,0 0 35px #00ff9c;
-margin-bottom:10px;
-}
-
-.subtitle{
-color:#aaa;
-margin-bottom:40px;
-}
-
-/* SEARCH */
-
-.searchBox{
-display:flex;
-gap:10px;
-}
-
-input{
-padding:14px;
-font-size:18px;
-border-radius:8px;
-border:none;
-width:260px;
-background:#1a1a1a;
-color:white;
-outline:none;
-}
-
-button{
-background:#00ff9c;
-border:none;
-padding:14px 20px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-transition:.2s;
-}
-
-button:hover{
-background:#00d683;
-transform:scale(1.05);
-}
-
-/* FOOTER */
-
-.footer{
-text-align:center;
-font-size:12px;
-color:#666;
-padding:40px;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -132,7 +26,9 @@ padding:40px;
 
 <h1 class="title">MARATHON TRACKER GG</h1>
 
-<p class="subtitle">Track stats, weapons and extractions</p>
+<p class="subtitle">
+Track stats, weapons and extractions
+</p>
 
 <div class="searchBox">
 
@@ -145,10 +41,11 @@ padding:40px;
 </div>
 
 <div class="footer">
-Not affiliated with Marathon.
+Not affiliated with Marathon
 </div>
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
