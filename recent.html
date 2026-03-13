@@ -2,8 +2,124 @@
 <html>
 
 <head>
+
 <title>Recent Runners</title>
-<link rel="stylesheet" href="style.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#05070a;
+color:white;
+}
+
+/* NAV */
+
+.topNav{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:25px 80px;
+
+border-bottom:1px solid rgba(255,255,255,0.05);
+
+}
+
+.navLeft{display:flex;gap:70px;}
+
+.navRight{display:flex;gap:60px;}
+
+.topNav a{
+
+color:#00ff9c;
+text-decoration:none;
+font-weight:600;
+font-size:17px;
+transition:0.25s;
+
+}
+
+.topNav a:hover{color:white;}
+
+/* PAGE CENTER */
+
+.container{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+margin-top:120px;
+
+}
+
+/* TITLE */
+
+.title{
+
+font-size:46px;
+color:#00ff9c;
+margin-bottom:40px;
+
+}
+
+/* BOX */
+
+.runnersBox{
+
+width:420px;
+
+background:#0f141b;
+
+border:1px solid #1c232b;
+
+border-radius:8px;
+
+padding:25px;
+
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+}
+
+/* RUNNER */
+
+.runner{
+
+padding:14px;
+
+border-bottom:1px solid #1a1f26;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+.runner:last-child{border-bottom:none;}
+
+.runner:hover{
+
+background:#141a22;
+
+color:#00ff9c;
+
+}
+
+.empty{
+
+opacity:0.5;
+
+text-align:center;
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -11,22 +127,75 @@
 <nav class="topNav">
 
 <div class="navLeft">
-<a href="/">← Home</a>
+
+<a href="/">Home</a>
+
+<a href="/recent.html">Recent Runners</a>
+
 </div>
 
-<div class="navRight" id="navAuth"></div>
+<div class="navRight">
+
+<a href="/login.html">Login</a>
+
+<a href="/signup.html">Create Account</a>
+
+</div>
 
 </nav>
 
-<div class="pageContainer">
+<div class="container">
 
-<h1 class="pageTitle">Recently Searched Runners</h1>
+<h1 class="title">Recently Searched Runners</h1>
 
-<div id="recentRunners" class="runnerGrid"></div>
+<div class="runnersBox" id="recentList">
 
 </div>
 
-<script src="app.js"></script>
+</div>
+
+<script>
+
+function loadRecent(){
+
+const list=document.getElementById("recentList")
+
+const runners=JSON.parse(localStorage.getItem("recentRunners")) || []
+
+if(runners.length===0){
+
+list.innerHTML="<div class='empty'>No runners searched yet</div>"
+
+return
+
+}
+
+list.innerHTML=""
+
+runners.forEach(name=>{
+
+const div=document.createElement("div")
+
+div.className="runner"
+
+div.innerText=name
+
+div.onclick=()=>{
+
+window.location.href="/player.html?name="+name
+
+}
+
+list.appendChild(div)
+
+})
+
+}
+
+loadRecent()
+
+</script>
 
 </body>
+
 </html>
