@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <title>MarathonTracker.gg</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="header">
-<div class="logo">MarathonTracker.gg</div>
-
-<div class="nav">
-<a href="/">Home</a>
-<a href="#">Leaderboard</a>
-</div>
-
-</div>
-
 <div class="hero">
 
-<h1>Track Marathon Player Stats</h1>
+<h1 class="title">MARATHON TRACKER GG</h1>
 
-<div class="searchbox">
-<input id="playerName" placeholder="Enter Bungie Name">
-<button onclick="searchPlayer()">Search</button>
+<p class="subtitle">Track stats, weapons, and extractions</p>
+
+<div class="searchBox">
+
+<input
+id="playerName"
+placeholder="Search Runner"
+/>
+
+<button onclick="searchPlayer()">
+Search
+</button>
+
 </div>
 
 </div>
@@ -31,4 +34,5 @@
 <script src="app.js"></script>
 
 </body>
+
 </html>
