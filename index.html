@@ -101,7 +101,6 @@ body::before {
   letter-spacing: 8px;
   color: #00ff9c;
   text-shadow: 0 0 25px #00ff9c;
-
   animation: bounceTitle 1s ease;
 }
 
@@ -161,15 +160,15 @@ body::before {
   box-shadow: 0 0 15px #00ff9c;
 }
 
-/* STATS DISPLAY - smaller and glow on error */
+/* STATS DISPLAY - smaller and error effect */
 #statsDisplay {
-  margin-top: 30px;
-  width: 500px; /* same as search box */
+  margin-top: 20px;
+  width: 400px; /* smaller than before */
   margin-left: auto;
   margin-right: auto;
   background: #0b0f14;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 12px; /* smaller padding */
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 255, 156, 0.3);
   text-align: center;
   color: #00ff9c;
@@ -179,7 +178,7 @@ body::before {
 
 #statsDisplay.error {
   background: #330000;
-  box-shadow: 0 0 20px #ff0000;
+  box-shadow: 0 0 15px #ff0000;
   color: #ff4444;
 }
 
@@ -226,7 +225,7 @@ body::before {
   </div>
 
   <!-- Stats display -->
-  <div id="statsDisplay">No recent searches</div>
+  <div id="statsDisplay">Please enter a runner name</div>
   
 </div>
 
