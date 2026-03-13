@@ -14,9 +14,9 @@ body {
   font-weight: 600;
   background: #020304;
   color: white;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
@@ -31,7 +31,7 @@ body {
   background-image: url("background.jpg");
   background-size: cover;
   background-position: center;
-  filter: blur(10px) brightness(15%);
+  filter: blur(12px) brightness(15%);
   z-index: -2;
 }
 
@@ -73,13 +73,14 @@ body {
   fill: #00ff9c;
 }
 
-/* HERO / PLAYER STATS */
+/* HERO */
 .hero {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
   z-index: 1;
 }
@@ -89,32 +90,49 @@ body {
   letter-spacing: 6px;
   color: #00ff9c;
   text-shadow: 0 0 20px #00ff9c;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
-.stats-box {
-  width: 600px;
+/* STAT CARDS CONTAINER */
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 1000px;
+}
+
+/* STAT CARD */
+.stat-card {
   background: #0b0f14;
-  padding: 30px 25px;
   border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0, 255, 156, 0.4);
-  text-align: left;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 0 20px rgba(0, 255, 156, 0.4);
   color: #00ff9c;
   font-weight: 800;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.stats-box h2 {
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 255, 156, 0.6);
+}
+
+.stat-card h3 {
   margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 32px;
+  margin-bottom: 15px;
+  font-size: 22px;
   text-align: center;
-  text-shadow: 0 0 15px #00ff9c;
+  text-shadow: 0 0 12px #00ff9c;
 }
 
-.stats-box p {
-  margin: 10px 0;
-  font-size: 18px;
+.stat-card p {
+  margin: 8px 0;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* FOOTER */
@@ -122,7 +140,7 @@ body {
   text-align: center;
   font-size: 12px;
   opacity: .5;
-  padding: 10px;
+  padding: 15px;
   position: relative;
   z-index: 1;
 }
@@ -131,9 +149,7 @@ body {
   opacity: .9;
   text-shadow: 0 0 10px #00ff9c;
 }
-
 </style>
-
 </head>
 
 <body>
@@ -144,7 +160,6 @@ body {
 <!-- NAVIGATION -->
 <div class="nav">
   <a href="/">
-    <!-- Home Icon SVG -->
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path d="M12 3l10 9h-3v9h-6v-6h-2v6H5v-9H2z"/>
     </svg>
@@ -155,23 +170,46 @@ body {
 <!-- HERO -->
 <div class="hero">
   <div class="title" id="playerNameTitle">Player Name</div>
-  
-  <div class="stats-box" id="statsBox">
-    <h2>Stats Overview</h2>
-    <p>Username: <span id="username">Player123</span></p>
-    <p>Score: <span id="score">0</span></p>
-    <p>Kills: <span id="kills">0</span></p>
-    <p>Deaths: <span id="deaths">0</span></p>
-    <p>K/D Ratio: <span id="kd">0</span></p>
-    <p>Matches Played: <span id="matches">0</span></p>
-    <p>Wins: <span id="wins">0</span></p>
-    <p>Losses: <span id="losses">0</span></p>
-    <p>Top Weapon: <span id="topWeapon">None</span></p>
-    <p>Favorite Weapon: <span id="favWeapon">None</span></p>
-    <p>Favorite Map: <span id="favoriteMap">None</span></p>
-    <p>Extraction Rate: <span id="extraction">0%</span></p>
-    <p>Longest Streak: <span id="streak">0</span></p>
-    <p>Total Time Played: <span id="timePlayed">0h</span></p>
+
+  <div class="stats-container">
+
+    <!-- GENERAL STATS CARD -->
+    <div class="stat-card" id="generalStats">
+      <h3>General Stats</h3>
+      <p>Username: <span id="username">Player123</span></p>
+      <p>Score: <span id="score">0</span></p>
+      <p>Matches Played: <span id="matches">0</span></p>
+      <p>Kills: <span id="kills">0</span></p>
+      <p>Deaths: <span id="deaths">0</span></p>
+      <p>K/D Ratio: <span id="kd">0</span></p>
+    </div>
+
+    <!-- PERFORMANCE STATS CARD -->
+    <div class="stat-card" id="performanceStats">
+      <h3>Performance</h3>
+      <p>Wins: <span id="wins">0</span></p>
+      <p>Losses: <span id="losses">0</span></p>
+      <p>Longest Streak: <span id="streak">0</span></p>
+      <p>Total Time Played: <span id="timePlayed">0h</span></p>
+      <p>Extraction Rate: <span id="extraction">0%</span></p>
+    </div>
+
+    <!-- WEAPON STATS CARD -->
+    <div class="stat-card" id="weaponStats">
+      <h3>Weapons</h3>
+      <p>Top Weapon: <span id="topWeapon">None</span></p>
+      <p>Favorite Weapon: <span id="favWeapon">None</span></p>
+    </div>
+
+    <!-- MAP STATS CARD -->
+    <div class="stat-card" id="mapStats">
+      <h3>Maps</h3>
+      <p>Favorite Map: <span id="favoriteMap">None</span></p>
+      <p>Matches on Perimeter: <span id="perimeter">0</span></p>
+      <p>Matches on Dire Marsh: <span id="direMarsh">0</span></p>
+      <p>Matches on Outpost: <span id="outpost">0</span></p>
+    </div>
+
   </div>
 </div>
 
@@ -181,23 +219,34 @@ body {
 
 <script src="app.js"></script>
 <script>
-// Example: dynamically fill stats from user search
+// Example function to populate stats
 function displayPlayerStats(playerData) {
   document.getElementById('playerNameTitle').textContent = playerData.username;
+
+  // General
   document.getElementById('username').textContent = playerData.username;
   document.getElementById('score').textContent = playerData.score;
+  document.getElementById('matches').textContent = playerData.matches;
   document.getElementById('kills').textContent = playerData.kills;
   document.getElementById('deaths').textContent = playerData.deaths;
   document.getElementById('kd').textContent = (playerData.kills / Math.max(playerData.deaths,1)).toFixed(2);
-  document.getElementById('matches').textContent = playerData.matches;
+
+  // Performance
   document.getElementById('wins').textContent = playerData.wins;
   document.getElementById('losses').textContent = playerData.losses;
-  document.getElementById('topWeapon').textContent = playerData.topWeapon;
-  document.getElementById('favWeapon').textContent = playerData.favoriteWeapon;
-  document.getElementById('favoriteMap').textContent = playerData.favoriteMap;
-  document.getElementById('extraction').textContent = playerData.extractionRate + '%';
   document.getElementById('streak').textContent = playerData.longestStreak;
   document.getElementById('timePlayed').textContent = playerData.totalTimePlayed + 'h';
+  document.getElementById('extraction').textContent = playerData.extractionRate + '%';
+
+  // Weapons
+  document.getElementById('topWeapon').textContent = playerData.topWeapon;
+  document.getElementById('favWeapon').textContent = playerData.favoriteWeapon;
+
+  // Maps
+  document.getElementById('favoriteMap').textContent = playerData.favoriteMap;
+  document.getElementById('perimeter').textContent = playerData.perimeterMatches;
+  document.getElementById('direMarsh').textContent = playerData.direMarshMatches;
+  document.getElementById('outpost').textContent = playerData.outpostMatches;
 }
 
 // Example dummy data
@@ -214,7 +263,10 @@ displayPlayerStats({
   favoriteMap: "Perimeter",
   extractionRate: 78,
   longestStreak: 12,
-  totalTimePlayed: 85
+  totalTimePlayed: 85,
+  perimeterMatches: 15,
+  direMarshMatches: 18,
+  outpostMatches: 12
 });
 </script>
 
