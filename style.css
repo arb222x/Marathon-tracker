@@ -1,8 +1,8 @@
 body{
 
-background:#0b0f14;
+background:#05070a;
 color:white;
-font-family:Arial;
+font-family:Arial, sans-serif;
 margin:0;
 
 }
@@ -11,136 +11,275 @@ margin:0;
 
 display:flex;
 justify-content:space-between;
-padding:20px;
-background:#0f141b;
+align-items:center;
+
+padding:18px 30px;
+
+background:#0b0f14;
+
+border-bottom:1px solid #111;
 
 }
 
 .topNav a{
 
 color:#00ff9c;
+
 text-decoration:none;
-margin-left:20px;
-font-weight:bold;
+
+font-weight:600;
+
+font-size:16px;
 
 }
 
 .hero{
 
 text-align:center;
-margin-top:120px;
+
+margin-top:140px;
 
 }
 
 .mainTitle{
 
-font-size:60px;
+font-size:72px;
+
 color:#00ff9c;
+
+letter-spacing:2px;
+
+}
+
+.searchBox{
+
+margin-top:40px;
 
 }
 
 .searchBox input{
 
-padding:14px;
+padding:16px;
+
+width:300px;
+
+background:#0f141b;
+
+border:1px solid #1c232b;
+
+color:white;
+
 font-size:18px;
-width:260px;
 
 }
 
 .searchBox button{
 
-padding:14px 20px;
+padding:16px 22px;
+
 background:#00ff9c;
+
 border:none;
-font-weight:bold;
+
+font-weight:700;
+
 cursor:pointer;
 
 }
 
-.trendingSection{
+.searchBox button:hover{
 
-margin-top:120px;
+background:#00e589;
+
+}
+
+.pageContainer{
+
+max-width:1100px;
+
+margin:100px auto;
+
+padding:20px;
+
+}
+
+.pageTitle{
+
+font-size:36px;
+
+margin-bottom:40px;
+
 text-align:center;
+
+color:#00ff9c;
 
 }
 
 .runnerGrid{
 
 display:grid;
+
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
 gap:20px;
-padding:40px;
 
 }
 
 .runnerCard{
 
-background:#151c25;
+background:#0f141b;
+
 padding:20px;
+
 border-radius:8px;
+
+border:1px solid #1c232b;
+
+transition:0.2s;
+
+}
+
+.runnerCard:hover{
+
+transform:translateY(-3px);
+
+border-color:#00ff9c;
 
 }
 
 .playerContainer{
 
+max-width:1000px;
+
+margin:80px auto;
+
 text-align:center;
-margin-top:80px;
 
 }
 
 .statsGrid{
 
 display:grid;
+
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-padding:60px;
+
+gap:25px;
+
+margin-top:40px;
 
 }
 
 .statCard{
 
-background:#151c25;
+background:#0f141b;
+
 padding:30px;
-border-radius:10px;
+
+border-radius:8px;
+
+border:1px solid #1c232b;
+
+}
+
+.statCard h3{
+
+color:#00ff9c;
+
+margin-bottom:10px;
 
 }
 
 .authBox{
 
-width:300px;
-margin:120px auto;
+max-width:350px;
+
+margin:140px auto;
+
 text-align:center;
 
 }
 
 .authBox input{
 
-display:block;
 width:100%;
-padding:12px;
+
+padding:14px;
+
 margin-bottom:15px;
+
+background:#0f141b;
+
+border:1px solid #1c232b;
+
+color:white;
+
+}
+
+.authBox button{
+
+width:100%;
+
+padding:14px;
+
+background:#00ff9c;
+
+border:none;
+
+font-weight:bold;
+
+cursor:pointer;
 
 }
 
 .profileContainer{
 
-width:400px;
+max-width:420px;
+
 margin:120px auto;
+
 text-align:center;
 
 }
 
-textarea{
+.profileContainer input,
+.profileContainer textarea{
 
 width:100%;
-height:100px;
+
+padding:12px;
+
+margin-bottom:15px;
+
+background:#0f141b;
+
+border:1px solid #1c232b;
+
+color:white;
+
+}
+
+.profileContainer button{
+
+padding:14px;
+
+width:100%;
+
+background:#00ff9c;
+
+border:none;
+
+font-weight:bold;
 
 }
 
 footer{
 
 text-align:center;
+
 margin-top:120px;
-opacity:0.6;
+
+opacity:0.5;
+
+font-size:14px;
 
 }
