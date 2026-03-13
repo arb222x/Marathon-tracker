@@ -3,101 +3,84 @@
 
 <head>
 
-<title>Marathon Tracker</title>
+<title>Marathon Tracker GG</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Google Font close to Marathon UI style -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* PAGE */
 
 body{
 margin:0;
 font-family:'Orbitron',sans-serif;
 background:#020304;
 color:white;
-overflow-x:hidden;
 }
 
-/* BACKGROUND IMAGE */
+/* BACKGROUND */
 
 .background{
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
 background-image:url("background.jpg");
-
 background-size:cover;
 background-position:center;
-
-/* darker + blur */
-
-filter:blur(6px) brightness(20%);
-
+filter:blur(10px) brightness(12%);
 z-index:-2;
-
 }
 
-/* extra dark overlay */
-
 .overlay{
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
-background:rgba(0,0,0,0.65);
-
+background:rgba(0,0,0,0.7);
 z-index:-1;
-
 }
 
-/* NAV BAR */
+/* NAVBAR */
 
-.topNav{
+.nav{
 
 display:flex;
 justify-content:space-between;
-align-items:center;
 
-padding:28px 90px;
-
-border-bottom:1px solid rgba(255,255,255,0.05);
-
-}
-
-.navLeft{display:flex;gap:90px;}
-
-.navRight{display:flex;gap:70px;}
-
-.topNav a{
-
-color:#00ff9c;
-
-text-decoration:none;
-
-font-weight:600;
+padding:25px 40px;
 
 font-size:16px;
 
-transition:0.25s;
+}
+
+.nav-left a{
+
+margin-right:30px;
+
+text-decoration:none;
+
+color:white;
+
+opacity:.85;
 
 }
 
-.topNav a:hover{
+.nav-right a{
 
-color:white;
+margin-left:25px;
+
+text-decoration:none;
+
+color:#00ff9c;
+
+}
+
+.nav a:hover{
+
+opacity:1;
 
 }
 
@@ -107,87 +90,81 @@ color:white;
 
 text-align:center;
 
-margin-top:180px;
+margin-top:140px;
 
 }
 
-/* MAIN TITLE */
+/* TITLE */
 
-.mainTitle{
+.title{
 
-font-size:72px;
-
-color:#00ff9c;
-
-letter-spacing:4px;
-
-margin-bottom:5px;
-
-text-shadow:0 0 20px rgba(0,255,156,0.35);
-
-}
-
-/* GG */
-
-.gg{
-
-font-size:30px;
+font-size:70px;
 
 letter-spacing:6px;
 
 color:#00ff9c;
 
-opacity:0.85;
+margin-bottom:10px;
 
-margin-bottom:55px;
+}
+
+.subtitle{
+
+font-size:22px;
+
+opacity:.7;
+
+margin-bottom:40px;
 
 }
 
 /* SEARCH */
 
-.searchBox{
+.search-box{
 
 display:flex;
+
 justify-content:center;
-gap:14px;
 
 }
 
-.searchBox input{
+.search-box input{
+
+width:380px;
 
 padding:16px;
 
-width:340px;
+border:none;
 
-background:#0f141b;
+background:#0b0f14;
 
 border:1px solid #1c232b;
 
 color:white;
 
-font-size:18px;
+font-size:16px;
 
-outline:none;
+border-radius:6px 0 0 6px;
 
 }
 
-.searchBox button{
+.search-box button{
 
-padding:16px 26px;
-
-background:#00ff9c;
+padding:16px 24px;
 
 border:none;
+
+background:#00ff9c;
 
 font-weight:700;
 
 cursor:pointer;
 
-transition:0.2s;
+border-radius:0 6px 6px 0;
 
 }
 
-.searchBox button:hover{
+.search-box button:hover{
 
 background:#00e589;
 
@@ -195,33 +172,25 @@ background:#00e589;
 
 /* FOOTER */
 
-footer{
+.footer{
 
-position:absolute;
+position:fixed;
 
-bottom:30px;
+bottom:20px;
 
 width:100%;
 
 text-align:center;
 
-opacity:0.6;
+font-size:12px;
 
-font-size:14px;
-
-transition:0.3s;
-
-cursor:pointer;
+opacity:.5;
 
 }
 
-footer:hover{
+.footer:hover{
 
-opacity:1;
-
-color:#00ff9c;
-
-letter-spacing:1px;
+opacity:.8;
 
 }
 
@@ -229,37 +198,43 @@ letter-spacing:1px;
 
 </head>
 
-<body>
+<body onload="updateNav()">
 
 <div class="background"></div>
 <div class="overlay"></div>
 
-<nav class="topNav">
+<!-- NAVIGATION -->
 
-<div class="navLeft">
+<div class="nav">
+
+<div class="nav-left">
 
 <a href="/">Home</a>
-
 <a href="/recent.html">Recent Runners</a>
 
 </div>
 
-<div class="navRight">
+<div class="nav-right">
 
-<a href="/login.html">Login</a>
+<a id="profileBtn" href="/profile.html">Profile</a>
 
-<a href="/signup.html">Create Account</a>
+<a id="loginBtn" href="/login.html">Login</a>
+
+<a id="signupBtn" href="/signup.html">Create Account</a>
 
 </div>
 
-</nav>
+</div>
+
+<!-- HERO -->
 
 <div class="hero">
 
-<h1 class="mainTitle">Marathon Tracker</h1>
-<div class="gg">GG</div>
+<div class="title">MARATHON TRACKER</div>
 
-<div class="searchBox">
+<div class="subtitle">Search Runner Stats</div>
+
+<div class="search-box">
 
 <input id="playerName" placeholder="Search Runner">
 
@@ -269,28 +244,19 @@ letter-spacing:1px;
 
 </div>
 
-<footer>
+<!-- FOOTER -->
 
-Not affiliated with Marathon.
+<div class="footer">
 
-</footer>
+Not affiliated with Bungie or Marathon.
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script src="app.js"></script>
-
-<script>
-
-function searchPlayer(){
-
-const player=document.getElementById("playerName").value;
-
-if(!player)return;
-
-window.location.href="/player.html?name="+player;
-
-}
-
-</script>
 
 </body>
 
 </html>
+```
