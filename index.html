@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Marathon Tracker</title>
+<title>Marathon Tracker GG</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -11,24 +11,23 @@
 
 <body>
 
-<div class="navbar">
+<nav class="topNav">
 
-<div class="navlinks">
+<div class="navLeft">
 <a href="/">Home</a>
-<a href="recent.html">Recently Searched</a>
-<a href="leaderboard.html">Leaderboard</a>
-<a href="weapons.html">Weapons</a>
+<a href="/recent.html">Recent Runners</a>
 </div>
 
+<div class="navRight" id="navAuth">
+<a href="/login.html">Login</a>
+<a href="/signup.html">Create Account</a>
 </div>
+
+</nav>
 
 <div class="hero">
 
-<h1 class="title">MARATHON TRACKER GG</h1>
-
-<p class="subtitle">
-Track stats, weapons and extractions
-</p>
+<h1 class="mainTitle">Marathon Tracker GG</h1>
 
 <div class="searchBox">
 
@@ -40,9 +39,19 @@ Track stats, weapons and extractions
 
 </div>
 
-<div class="footer">
-Not affiliated with Marathon
+<div class="trendingSection">
+
+<h2>Trending Runners</h2>
+
+<div id="trendingRunners" class="runnerGrid"></div>
+
 </div>
+
+<footer>
+
+Not affiliated with Marathon.
+
+</footer>
 
 <script src="app.js"></script>
 
