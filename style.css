@@ -7,17 +7,35 @@ margin:0;
 
 }
 
+
+
+/* NAVIGATION */
+
 .topNav{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
 
-padding:18px 30px;
+padding:20px 40px;
 
 background:#0b0f14;
 
 border-bottom:1px solid #111;
+
+}
+
+.navLeft{
+
+display:flex;
+gap:40px;
+
+}
+
+.navRight{
+
+display:flex;
+gap:40px;
 
 }
 
@@ -33,11 +51,15 @@ font-size:16px;
 
 }
 
+
+
+/* HERO */
+
 .hero{
 
 text-align:center;
 
-margin-top:140px;
+margin-top:160px;
 
 }
 
@@ -49,11 +71,19 @@ color:#00ff9c;
 
 letter-spacing:2px;
 
+margin-bottom:50px;
+
 }
+
+
+
+/* SEARCH */
 
 .searchBox{
 
-margin-top:40px;
+display:flex;
+justify-content:center;
+gap:10px;
 
 }
 
@@ -61,7 +91,7 @@ margin-top:40px;
 
 padding:16px;
 
-width:300px;
+width:320px;
 
 background:#0f141b;
 
@@ -92,6 +122,10 @@ cursor:pointer;
 background:#00e589;
 
 }
+
+
+
+/* RECENT RUNNERS */
 
 .pageContainer{
 
@@ -135,23 +169,17 @@ border-radius:8px;
 
 border:1px solid #1c232b;
 
-transition:0.2s;
-
 }
 
-.runnerCard:hover{
 
-transform:translateY(-3px);
 
-border-color:#00ff9c;
-
-}
+/* PLAYER PAGE */
 
 .playerContainer{
 
 max-width:1000px;
 
-margin:80px auto;
+margin:100px auto;
 
 text-align:center;
 
@@ -188,6 +216,10 @@ color:#00ff9c;
 margin-bottom:10px;
 
 }
+
+
+
+/* LOGIN */
 
 .authBox{
 
@@ -231,6 +263,10 @@ cursor:pointer;
 
 }
 
+
+
+/* PROFILE */
+
 .profileContainer{
 
 max-width:420px;
@@ -258,25 +294,15 @@ color:white;
 
 }
 
-.profileContainer button{
 
-padding:14px;
 
-width:100%;
-
-background:#00ff9c;
-
-border:none;
-
-font-weight:bold;
-
-}
+/* FOOTER */
 
 footer{
 
 text-align:center;
 
-margin-top:120px;
+margin-top:200px;
 
 opacity:0.5;
 
