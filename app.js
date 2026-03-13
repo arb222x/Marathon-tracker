@@ -1,319 +1,263 @@
-/* -------------------------
-SUPABASE CONNECTION
-------------------------- */
+<!DOCTYPE html>
+<html>
 
-const SUPABASE_URL = "https://kplcjgvajraauhrxbwuy.supabase.co"
+<head>
 
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0qjurs2izTX5UkyhmWfYfYfOk"
+<title>Recent Runners</title>
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
+<style>
 
-/* -------------------------
-PLAYER SEARCH
-------------------------- */
+/* PAGE */
 
-function searchPlayer(){
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+background:#020304;
+color:white;
+}
 
-const player = document.getElementById("playerName").value
+/* BACKGROUND */
 
-if(!player) return
+.background{
 
-saveRecentRunner(player)
+position:fixed;
+top:0;
+left:0;
 
-window.location.href = "/player.html?name=" + player
+width:100%;
+height:100%;
+
+background-image:url("background.jpg");
+
+background-size:cover;
+background-position:center;
+
+filter:blur(6px) brightness(20%);
+
+z-index:-2;
 
 }
 
+.overlay{
 
+position:fixed;
+top:0;
+left:0;
 
-/* -------------------------
-SAVE RECENT SEARCHES
-------------------------- */
+width:100%;
+height:100%;
 
-function saveRecentRunner(player){
+background:rgba(0,0,0,0.65);
 
-let recent = JSON.parse(localStorage.getItem("recentRunners")) || []
-
-recent = recent.filter(p => p !== player)
-
-recent.unshift(player)
-
-recent = recent.slice(0,10)
-
-localStorage.setItem("recentRunners", JSON.stringify(recent))
+z-index:-1;
 
 }
 
+/* NAV BAR */
 
+.topNav{
 
-/* -------------------------
-LOAD RECENT RUNNERS PAGE
-------------------------- */
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-function loadRecentRunners(){
+padding:28px 90px;
 
-const list = document.getElementById("recentList")
-
-if(!list) return
-
-const runners = JSON.parse(localStorage.getItem("recentRunners")) || []
-
-if(runners.length === 0){
-
-list.innerHTML = "<div class='empty'>No runners searched yet</div>"
-
-return
+border-bottom:1px solid rgba(255,255,255,0.05);
 
 }
 
-list.innerHTML = ""
+.navLeft{display:flex;gap:90px;}
 
-runners.forEach(name => {
+.navRight{display:flex;gap:70px;}
 
-const div = document.createElement("div")
+.topNav a{
 
-div.className = "runner"
+color:#00ff9c;
 
-div.innerText = name
+text-decoration:none;
 
-div.onclick = () => {
+font-weight:600;
 
-window.location.href = "/player.html?name=" + name
+font-size:16px;
 
-}
-
-list.appendChild(div)
-
-})
+transition:0.25s;
 
 }
 
+.topNav a:hover{
 
-
-/* -------------------------
-LOAD PLAYER STATS
-------------------------- */
-
-async function loadPlayer(){
-
-const params = new URLSearchParams(window.location.search)
-
-const player = params.get("name")
-
-if(!player) return
-
-const nameBox = document.getElementById("playerNameDisplay")
-
-if(nameBox) nameBox.innerText = player
-
-
-
-const { data, error } = await client
-
-.from("players")
-
-.select("*")
-
-.eq("name", player)
-
-.single()
-
-
-
-if(error){
-
-console.log(error)
-
-return
+color:white;
 
 }
 
+/* PAGE CENTER */
 
+.container{
 
-/* PLAYER STATS */
+display:flex;
+flex-direction:column;
+align-items:center;
 
-if(document.getElementById("kills"))
-document.getElementById("kills").innerText = data.kills || 0
-
-if(document.getElementById("deaths"))
-document.getElementById("deaths").innerText = data.deaths || 0
-
-if(document.getElementById("matches"))
-document.getElementById("matches").innerText = data.matches || 0
-
-if(document.getElementById("extractions"))
-document.getElementById("extractions").innerText = data.extractions || 0
-
-if(document.getElementById("kd"))
-document.getElementById("kd").innerText = data.kd || "0.0"
+margin-top:150px;
 
 }
 
+/* TITLE */
 
+.title{
 
-/* -------------------------
-LOAD LEADERBOARD
-------------------------- */
+font-size:44px;
 
-async function loadLeaderboard(){
+color:#00ff9c;
 
-const board = document.getElementById("leaderboard")
+letter-spacing:3px;
 
-if(!board) return
+margin-bottom:40px;
 
-const { data } = await client
-
-.from("players")
-
-.select("*")
-
-.order("kills",{ascending:false})
-
-.limit(10)
-
-
-
-board.innerHTML = ""
-
-
-
-data.forEach(player => {
-
-const row = document.createElement("div")
-
-row.className = "leaderRow"
-
-row.innerHTML = `
-
-<span>${player.name}</span>
-<span>${player.kills} Kills</span>
-
-`
-
-row.onclick = () => {
-
-window.location.href = "/player.html?name=" + player.name
+text-shadow:0 0 15px rgba(0,255,156,0.35);
 
 }
 
-board.appendChild(row)
+/* RUNNERS BOX */
 
-})
+.runnersBox{
 
-}
+width:420px;
 
+background:#0f141b;
 
+border:1px solid #1c232b;
 
-/* -------------------------
-MOST POPULAR WEAPONS
-------------------------- */
+border-radius:8px;
 
-async function loadWeaponStats(){
+padding:25px;
 
-const container = document.getElementById("weaponStats")
-
-if(!container) return
-
-const { data } = await client
-
-.from("weapons")
-
-.select("*")
-
-.order("kills",{ascending:false})
-
-.limit(5)
-
-
-
-container.innerHTML = ""
-
-
-
-data.forEach(w => {
-
-const row = document.createElement("div")
-
-row.className = "weaponRow"
-
-row.innerHTML = `
-
-<span>${w.weapon}</span>
-<span>${w.kills} kills</span>
-
-`
-
-container.appendChild(row)
-
-})
+box-shadow:0 0 20px rgba(0,0,0,0.5);
 
 }
 
+/* RUNNER ITEM */
 
+.runner{
 
-/* -------------------------
-EXTRACTION STATS
-------------------------- */
+padding:15px;
 
-async function loadExtractionStats(){
+border-bottom:1px solid #1a1f26;
 
-const container = document.getElementById("extractionStats")
+cursor:pointer;
 
-if(!container) return
+transition:0.2s;
 
-const { data } = await client
-
-.from("players")
-
-.select("*")
-
-.order("extractions",{ascending:false})
-
-.limit(5)
-
-
-
-container.innerHTML = ""
-
-
-
-data.forEach(p => {
-
-const row = document.createElement("div")
-
-row.className = "extractRow"
-
-row.innerHTML = `
-
-<span>${p.name}</span>
-<span>${p.extractions} extractions</span>
-
-`
-
-container.appendChild(row)
-
-})
+font-size:18px;
 
 }
 
+.runner:last-child{
 
+border-bottom:none;
 
-/* -------------------------
-AUTO LOAD FEATURES
-------------------------- */
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+.runner:hover{
 
-loadRecentRunners()
+background:#141a22;
 
-loadPlayer()
+color:#00ff9c;
 
-loadLeaderboard()
+}
 
-loadWeaponStats()
+/* EMPTY TEXT */
 
-loadExtractionStats()
+.empty{
 
-})
+text-align:center;
+
+opacity:0.6;
+
+}
+
+/* FOOTER */
+
+footer{
+
+position:absolute;
+
+bottom:30px;
+
+width:100%;
+
+text-align:center;
+
+opacity:0.6;
+
+font-size:14px;
+
+transition:0.3s;
+
+cursor:pointer;
+
+}
+
+footer:hover{
+
+opacity:1;
+
+color:#00ff9c;
+
+letter-spacing:1px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<nav class="topNav">
+
+<div class="navLeft">
+
+<a href="/">Home</a>
+
+<a href="/recent.html">Recent Runners</a>
+
+</div>
+
+<div class="navRight">
+
+<a href="/login.html">Login</a>
+
+<a href="/signup.html">Create Account</a>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1 class="title">Recently Searched Runners</h1>
+
+<div class="runnersBox" id="recentList"></div>
+
+</div>
+
+<footer>
+
+Not affiliated with Marathon.
+
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
