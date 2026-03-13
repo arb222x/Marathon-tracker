@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Player Stats</title>
@@ -8,43 +8,84 @@
 <body>
 
 <div class="header">
-MarathonTracker.gg
+<div class="logo">MarathonTracker.gg</div>
 </div>
+
+<div class="section">
 
 <h1 id="playerTitle"></h1>
 
 <div class="stats">
 
 <div class="card">
-Kills
-<div id="kills"></div>
+<h3>KILLS</h3>
+<div class="value" id="kills"></div>
 </div>
 
 <div class="card">
-Deaths
-<div id="deaths"></div>
+<h3>DEATHS</h3>
+<div class="value" id="deaths"></div>
 </div>
 
 <div class="card">
-KD
-<div id="kd"></div>
+<h3>KD</h3>
+<div class="value" id="kd"></div>
 </div>
 
 <div class="card">
-Extractions
-<div id="extract"></div>
+<h3>EXTRACTIONS</h3>
+<div class="value" id="extract"></div>
 </div>
 
 </div>
+
+</div>
+
+<div class="section">
 
 <h2>Match History</h2>
-<table id="matchTable"></table>
+
+<table class="table" id="matchTable">
+
+<tr>
+<th>Match</th>
+<th>Kills</th>
+<th>Result</th>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
 
 <h2>Weapon Stats</h2>
-<table id="weaponTable"></table>
+
+<table class="table" id="weaponTable">
+
+<tr>
+<th>Weapon</th>
+<th>Kills</th>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
 
 <h2>Extraction Stats</h2>
-<table id="extractTable"></table>
+
+<table class="table" id="extractTable">
+
+<tr>
+<th>Map</th>
+<th>Extractions</th>
+</tr>
+
+</table>
+
+</div>
 
 <script src="app.js"></script>
 
