@@ -16,7 +16,7 @@ font-family:Arial, Helvetica, sans-serif;
 margin:0;
 }
 
-/* NAV BAR */
+/* NAVBAR */
 
 .navbar{
 position:fixed;
@@ -48,17 +48,16 @@ font-size:14px;
 color:#00ff9c;
 }
 
-
 /* HERO */
 
 .hero{
-height:70vh;
+height:80vh;
 display:flex;
 flex-direction:column;
 justify-content:flex-start;
 align-items:center;
 text-align:center;
-padding-top:140px;
+padding-top:160px;
 }
 
 .title{
@@ -66,10 +65,7 @@ font-size:64px;
 letter-spacing:4px;
 margin-bottom:10px;
 color:#00ff9c;
-
-text-shadow:
-0 0 10px #00ff9c,
-0 0 30px #00ff9c;
+text-shadow:0 0 10px #00ff9c,0 0 30px #00ff9c;
 }
 
 .subtitle{
@@ -108,66 +104,6 @@ background:#00d683;
 transform:scale(1.05);
 }
 
-
-/* RECENT RUNNERS */
-
-.trending{
-
-max-width:1000px;
-
-margin:auto;
-
-padding:40px;
-
-}
-
-.runnerGrid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-.runnerCard{
-
-background:#121212;
-
-border:1px solid #1f1f1f;
-
-padding:20px;
-
-border-radius:10px;
-
-text-align:center;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.runnerCard:hover{
-
-border-color:#00ff9c;
-
-transform:scale(1.05);
-
-}
-
-.runnerName{
-
-color:#00ff9c;
-
-font-weight:bold;
-
-margin-bottom:10px;
-
-}
-
-
 /* FOOTER */
 
 .footer{
@@ -191,11 +127,10 @@ MarathonTracker.gg
 
 <div class="navlinks">
 <a href="/">Home</a>
-<a href="leaderboard.html">Leaderboard</a>
+<a href="recent.html">Recently Searched</a>
 </div>
 
 </div>
-
 
 <div class="hero">
 
@@ -205,30 +140,13 @@ MarathonTracker.gg
 
 <div class="searchBox">
 
-<input
-id="playerName"
-placeholder="Search Runner"
-/>
+<input id="playerName" placeholder="Search Runner"/>
 
-<button onclick="searchPlayer()">
-Search
-</button>
+<button onclick="searchPlayer()">Search</button>
 
 </div>
 
 </div>
-
-
-<div class="trending">
-
-<h2>Recently Searched Runners</h2>
-
-<div class="runnerGrid" id="recentRunners">
-
-</div>
-
-</div>
-
 
 <div class="footer">
 Not affiliated with Marathon.
