@@ -2,17 +2,14 @@
 <html>
 
 <head>
-
 <title>MarathonTracker.gg</title>
-
-<link rel="stylesheet" href="style.css">
 
 <style>
 
 body{
 background:#0a0a0a;
 color:white;
-font-family:Arial, Helvetica, sans-serif;
+font-family:Arial;
 margin:0;
 }
 
@@ -26,9 +23,7 @@ background:#111;
 border-bottom:1px solid #222;
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:15px 40px;
-z-index:10;
 }
 
 .logo{
@@ -41,7 +36,6 @@ font-size:20px;
 color:#aaa;
 margin-left:20px;
 text-decoration:none;
-font-size:14px;
 }
 
 .navlinks a:hover{
@@ -54,39 +48,30 @@ color:#00ff9c;
 height:80vh;
 display:flex;
 flex-direction:column;
-justify-content:flex-start;
 align-items:center;
 text-align:center;
-padding-top:160px;
+padding-top:180px;
 }
 
 .title{
 font-size:64px;
-letter-spacing:4px;
-margin-bottom:10px;
 color:#00ff9c;
-text-shadow:0 0 10px #00ff9c,0 0 30px #00ff9c;
-}
-
-.subtitle{
-color:#aaa;
-margin-bottom:40px;
+text-shadow:0 0 15px #00ff9c;
 }
 
 .searchBox{
+margin-top:30px;
 display:flex;
 gap:10px;
 }
 
 input{
 padding:14px;
-font-size:18px;
-border-radius:8px;
-border:none;
 width:260px;
 background:#1a1a1a;
+border:none;
+border-radius:8px;
 color:white;
-outline:none;
 }
 
 button{
@@ -96,15 +81,11 @@ padding:14px 20px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-transition:.2s;
 }
 
 button:hover{
 background:#00d683;
-transform:scale(1.05);
 }
-
-/* FOOTER */
 
 .footer{
 text-align:center;
@@ -121,13 +102,13 @@ padding:40px;
 
 <div class="navbar">
 
-<div class="logo">
-MarathonTracker.gg
-</div>
+<div class="logo">MarathonTracker.gg</div>
 
 <div class="navlinks">
 <a href="/">Home</a>
 <a href="recent.html">Recently Searched</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="weapons.html">Weapons</a>
 </div>
 
 </div>
@@ -136,11 +117,11 @@ MarathonTracker.gg
 
 <h1 class="title">MARATHON TRACKER GG</h1>
 
-<p class="subtitle">Track stats, weapons, and extractions</p>
+<p>Track stats, weapons and extractions</p>
 
 <div class="searchBox">
 
-<input id="playerName" placeholder="Search Runner"/>
+<input id="playerName" placeholder="Search Runner">
 
 <button onclick="searchPlayer()">Search</button>
 
@@ -155,5 +136,4 @@ Not affiliated with Marathon.
 <script src="app.js"></script>
 
 </body>
-
 </html>
