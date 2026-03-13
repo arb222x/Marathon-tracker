@@ -7,6 +7,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -16,7 +18,10 @@ margin:0;
 font-family:'Orbitron',sans-serif;
 background:#020304;
 color:white;
+overflow:hidden;
 }
+
+/* BACKGROUND */
 
 .background{
 position:fixed;
@@ -27,7 +32,7 @@ height:100%;
 background-image:url("background.jpg");
 background-size:cover;
 background-position:center;
-filter:blur(6px) brightness(20%);
+filter:blur(8px) brightness(20%);
 z-index:-2;
 }
 
@@ -41,6 +46,43 @@ background:rgba(0,0,0,0.65);
 z-index:-1;
 }
 
+/* HOME BUTTON */
+
+.home-button{
+
+position:fixed;
+top:25px;
+left:25px;
+
+font-size:22px;
+
+color:#00ff9c;
+
+background:#0f141b;
+border:1px solid #1c232b;
+
+padding:12px 14px;
+
+border-radius:10px;
+
+text-decoration:none;
+
+transition:.2s;
+
+box-shadow:0 0 12px rgba(0,255,156,0.3);
+
+}
+
+.home-button:hover{
+
+background:#00ff9c;
+color:#000;
+transform:scale(1.1);
+
+}
+
+/* CENTER PANEL */
+
 .container{
 display:flex;
 justify-content:center;
@@ -49,40 +91,76 @@ height:100vh;
 }
 
 .panel{
+
 width:420px;
+
 background:#0f141b;
+
 border:1px solid #1c232b;
-border-radius:10px;
-padding:40px;
+
+border-radius:12px;
+
+padding:45px;
+
 text-align:center;
+
+box-shadow:0 0 25px rgba(0,0,0,0.6);
+
 }
+
+/* TITLE */
 
 .title{
 font-size:32px;
 color:#00ff9c;
 margin-bottom:30px;
+letter-spacing:2px;
 }
+
+/* INPUTS */
 
 input{
+
 width:100%;
+
 padding:14px;
+
 margin-bottom:18px;
+
 background:#0b0f14;
+
 border:1px solid #1c232b;
+
 color:white;
+
+border-radius:6px;
+
 }
 
+/* BUTTON */
+
 button{
+
 width:100%;
+
 padding:14px;
+
 background:#00ff9c;
+
 border:none;
+
 font-weight:700;
+
+border-radius:6px;
+
 cursor:pointer;
+
 }
 
 button:hover{
+
 background:#00e589;
+
 }
 
 </style>
@@ -93,6 +171,10 @@ background:#00e589;
 
 <div class="background"></div>
 <div class="overlay"></div>
+
+<a href="/" class="home-button">
+<i class="fa-solid fa-house"></i>
+</a>
 
 <div class="container">
 
@@ -114,5 +196,4 @@ background:#00e589;
 <script src="app.js"></script>
 
 </body>
-
 </html>
