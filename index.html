@@ -74,6 +74,18 @@ body{
   letter-spacing:8px;
   color:#00ff9c;
   text-shadow:0 0 25px #00ff9c;
+
+  /* BOUNCE ANIMATION */
+  animation: bounceTitle 1s ease;
+}
+
+/* Bounce keyframes */
+@keyframes bounceTitle {
+  0% { transform: translateY(-50px); }
+  30% { transform: translateY(20px); }
+  50% { transform: translateY(-10px); }
+  70% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
 }
 
 .subtitle{
