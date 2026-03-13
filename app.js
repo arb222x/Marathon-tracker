@@ -1,7 +1,8 @@
-const SUPABASE_URL = "https://kplcjgvajraauhrxbwuy.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+const SUPABASE_URL="https://kplcjgvajraauhrxbwuy.supabase.co"
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0Jrq8turs2izTX5UkyhmWfYfOk"
+
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 
 /* LOGIN */
 
@@ -10,7 +11,7 @@ async function login(){
 const email=document.getElementById("email").value
 const password=document.getElementById("password").value
 
-const {data,error}=await client.auth.signInWithPassword({
+const {error}=await client.auth.signInWithPassword({
 
 email:email,
 password:password
@@ -36,7 +37,7 @@ async function signup(){
 const email=document.getElementById("email").value
 const password=document.getElementById("password").value
 
-const {data,error}=await client.auth.signUp({
+const {error}=await client.auth.signUp({
 
 email:email,
 password:password
@@ -49,39 +50,30 @@ alert(error.message)
 
 }else{
 
-alert("Account created!")
-
 window.location.href="/"
 
 }
 
 }
 
-/* CHECK USER SESSION */
+/* NAV */
 
 async function updateNav(){
 
-const {data:{session}} = await client.auth.getSession()
-
-const loginBtn=document.getElementById("loginBtn")
-const signupBtn=document.getElementById("signupBtn")
-const profileBtn=document.getElementById("profileBtn")
+const {data:{session}}=await client.auth.getSession()
 
 if(session){
 
-loginBtn.style.display="none"
-signupBtn.style.display="none"
-profileBtn.style.display="inline-block"
+document.getElementById("loginBtn").style.display="none"
+document.getElementById("signupBtn").style.display="none"
 
 }else{
 
-profileBtn.style.display="none"
+document.getElementById("profileBtn").style.display="none"
 
 }
 
 }
-
-updateNav()
 
 /* LOGOUT */
 
@@ -89,7 +81,7 @@ async function logout(){
 
 await client.auth.signOut()
 
-location.reload()
+window.location.href="/"
 
 }
 
@@ -97,7 +89,7 @@ location.reload()
 
 async function saveProfile(){
 
-const {data:{user}} = await client.auth.getUser()
+const {data:{user}}=await client.auth.getUser()
 
 const username=document.getElementById("username").value
 const bio=document.getElementById("bio").value
@@ -114,7 +106,7 @@ bungie_id:bungie
 
 })
 
-alert("Profile saved!")
+alert("Profile saved")
 
 }
 
@@ -122,7 +114,7 @@ alert("Profile saved!")
 
 async function loadProfile(){
 
-const {data:{user}} = await client.auth.getUser()
+const {data:{user}}=await client.auth.getUser()
 
 const {data}=await client
 .from("profiles")
@@ -136,5 +128,34 @@ document.getElementById("username").value=data.username||""
 document.getElementById("bio").value=data.bio||""
 document.getElementById("favorite").value=data.favorite_runner||""
 document.getElementById("bungie").value=data.bungie_id||""
+
+}
+
+/* PROFILE SEARCH */
+
+async function searchProfiles(){
+
+const name=document.getElementById("profileSearch").value
+
+const {data}=await client
+.from("profiles")
+.select("username")
+.ilike("username","%"+name+"%")
+
+const results=document.getElementById("results")
+
+results.innerHTML=""
+
+data.forEach(p=>{
+
+const div=document.createElement("div")
+
+div.className="profile"
+
+div.innerText=p.username
+
+results.appendChild(div)
+
+})
 
 }
