@@ -2,91 +2,31 @@
 <html>
 
 <head>
-
-<title>Recently Searched Runners</title>
-
+<title>Recent Runners</title>
 <link rel="stylesheet" href="style.css">
-
-<style>
-
-body{
-background:#0a0a0a;
-color:white;
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-}
-
-.navbar{
-background:#111;
-border-bottom:1px solid #222;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 40px;
-}
-
-.logo{
-color:#00ff9c;
-font-weight:bold;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
-
-.runnerList{
-margin-top:30px;
-}
-
-.runner{
-padding:18px;
-border-bottom:1px solid #222;
-cursor:pointer;
-}
-
-.runner:hover{
-color:#00ff9c;
-}
-
-.footer{
-text-align:center;
-font-size:12px;
-color:#666;
-padding:40px;
-}
-
-</style>
-
 </head>
 
 <body>
 
-<div class="navbar">
+<nav class="topNav">
 
-<div class="logo">MarathonTracker.gg</div>
-
-<div>
-<a href="/" style="color:#aaa;text-decoration:none;">Home</a>
+<div class="navLeft">
+<a href="/">← Home</a>
 </div>
 
-</div>
+<div class="navRight" id="navAuth"></div>
 
-<div class="container">
+</nav>
 
-<h1>Recently Searched Runners</h1>
+<div class="pageContainer">
 
-<div id="recentList" class="runnerList"></div>
+<h1 class="pageTitle">Recently Searched Runners</h1>
 
-</div>
+<div id="recentRunners" class="runnerGrid"></div>
 
-<div class="footer">
-Not affiliated with Marathon.
 </div>
 
 <script src="app.js"></script>
 
 </body>
-
 </html>
