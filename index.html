@@ -45,26 +45,26 @@ body{
   z-index:-2;
 }
 
-/* BOTTOM FLICKER GLOW */
+/* BOTTOM SOFT FLICKERING GLOW */
 body::after {
   content: "";
   position: fixed;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:100%;
-  height:200px;
-  background: radial-gradient(circle, rgba(0,255,156,0.15) 0%, transparent 80%);
+  width:120%;
+  height:300px;
+  background: radial-gradient(circle at bottom center, rgba(0,255,156,0.1) 0%, rgba(0,255,156,0) 90%);
   pointer-events: none;
   z-index:-1;
   animation: flicker 3s infinite;
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 0.15; }
-  25% { opacity: 0.25; }
-  50% { opacity: 0.12; }
-  75% { opacity: 0.22; }
+  0%, 100% { opacity: 0.1; }
+  25% { opacity: 0.15; }
+  50% { opacity: 0.08; }
+  75% { opacity: 0.13; }
 }
 
 /* NAVBAR */
