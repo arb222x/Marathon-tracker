@@ -2,231 +2,143 @@
 <html>
 
 <head>
+  <title>Recent Runners - Marathon Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
-<title>Recent Runners</title>
+  <style>
+    /* HERO SECTION */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 120px;
+      gap: 25px;
+      z-index: 1;
+      position: relative;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    .title {
+      font-size: 64px;
+      letter-spacing: 6px;
+      color: #00ff9c;
+      text-shadow: 0 0 25px #00ff9c, 0 0 40px #00ff9c;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    /* RECENT RUNNERS CONTAINER */
+    .recent-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 90%;
+      max-width: 400px;
+    }
 
-<style>
+    /* INDIVIDUAL RUNNER BOX */
+    .runner-box {
+      background: rgba(11, 15, 20, 0.85);
+      border-radius: 12px;
+      padding: 15px 20px;
+      color: #00ff9c;
+      font-weight: 800;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 156, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-/* PAGE */
+    .runner-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px #00ff9c, inset 0 0 10px rgba(0, 255, 156, 0.2);
+    }
 
-body{
-margin:0;
-font-family:'Orbitron',sans-serif;
-background:#020304;
-color:white;
-}
+    /* EMPTY STATE */
+    .no-runners {
+      background: rgba(30, 0, 0, 0.85);
+      border-radius: 12px;
+      padding: 15px 20px;
+      color: #ff4d4d;
+      font-weight: 800;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
+      animation: pulseRed 1.5s infinite alternate;
+    }
 
-/* BACKGROUND */
+    @keyframes pulseRed {
+      from {
+        box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+      }
 
-.background{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-image:url("background.jpg");
-background-size:cover;
-background-position:center;
-filter:blur(6px) brightness(20%);
-z-index:-2;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-z-index:-1;
-}
-
-/* NAV BAR */
-
-.topNav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:28px 90px;
-border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
-.navLeft{display:flex;gap:90px;}
-.navRight{display:flex;gap:70px;}
-
-.topNav a{
-color:#00ff9c;
-text-decoration:none;
-font-weight:600;
-font-size:16px;
-transition:0.25s;
-}
-
-.topNav a:hover{
-color:white;
-}
-
-/* PAGE CENTER */
-
-.container{
-display:flex;
-flex-direction:column;
-align-items:center;
-margin-top:150px;
-}
-
-/* TITLE */
-
-.title{
-font-size:44px;
-color:#00ff9c;
-letter-spacing:3px;
-margin-bottom:40px;
-text-shadow:0 0 15px rgba(0,255,156,0.35);
-}
-
-/* RUNNERS BOX */
-
-.runnersBox{
-width:420px;
-background:#0f141b;
-border:1px solid #1c232b;
-border-radius:8px;
-padding:25px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
-}
-
-/* RUNNER */
-
-.runner{
-padding:15px;
-border-bottom:1px solid #1a1f26;
-cursor:pointer;
-transition:0.2s;
-font-size:18px;
-}
-
-.runner:last-child{
-border-bottom:none;
-}
-
-.runner:hover{
-background:#141a22;
-color:#00ff9c;
-}
-
-/* EMPTY MESSAGE */
-
-.empty{
-text-align:center;
-opacity:0.35;
-font-size:16px;
-letter-spacing:1px;
-padding:20px;
-}
-
-/* FOOTER */
-
-footer{
-position:absolute;
-bottom:30px;
-width:100%;
-text-align:center;
-opacity:0.6;
-font-size:14px;
-transition:0.3s;
-cursor:pointer;
-}
-
-footer:hover{
-opacity:1;
-color:#00ff9c;
-letter-spacing:1px;
-}
-
-</style>
-
+      to {
+        box-shadow: 0 0 25px rgba(255, 77, 77, 0.6);
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="background"></div>
-<div class="overlay"></div>
+  <div class="background"></div>
+  <div class="overlay"></div>
 
-<nav class="topNav">
+  <!-- NAVIGATION -->
+  <div class="nav">
+    <a href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M12 3l10 9h-3v9h-6v-6h-2v6H5v-9H2z" />
+      </svg>
+      Home
+    </a>
+  </div>
 
-<div class="navLeft">
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="title">Recent Runners</div>
 
-<a href="/">Home</a>
+    <div class="recent-container" id="recentContainer">
+      <!-- Runner boxes will populate here -->
+    </div>
+  </div>
 
-<a href="/recent.html">Recent Runners</a>
+  <div class="footer">
+    Not affiliated with Bungie.
+  </div>
 
-</div>
+  <script src="app.js"></script>
+  <script>
+    // Example recent runners array
+    let recentRunners = []; // Start empty to show "No recent searches"
 
-</div>
+    const container = document.getElementById("recentContainer");
 
-</nav>
+    function renderRecentRunners() {
+      container.innerHTML = '';
+      if (recentRunners.length === 0) {
+        const noRunners = document.createElement('div');
+        noRunners.className = 'no-runners';
+        noRunners.textContent = "No recent searches";
+        container.appendChild(noRunners);
+      } else {
+        recentRunners.forEach(runner => {
+          const runnerBox = document.createElement('div');
+          runnerBox.className = 'runner-box';
+          runnerBox.textContent = runner;
+          runnerBox.onclick = () => {
+            // Navigate to player page (replace with actual logic)
+            window.location.href = `player.html?name=${runner}`;
+          };
+          container.appendChild(runnerBox);
+        });
+      }
+    }
 
-<div class="container">
-
-<h1 class="title">Recently Searched Runners</h1>
-
-<div class="runnersBox" id="recentList"></div>
-
-</div>
-
-<footer>
-Not affiliated with Marathon.
-</footer>
-
-<script src="app.js"></script>
-
-<script>
-
-function loadRecentRunners(){
-
-const list=document.getElementById("recentList")
-
-const runners=JSON.parse(localStorage.getItem("recentRunners")) || []
-
-if(runners.length===0){
-
-list.innerHTML="<div class='empty'>No recent searches</div>"
-
-return
-
-}
-
-list.innerHTML=""
-
-runners.forEach(name=>{
-
-const div=document.createElement("div")
-
-div.className="runner"
-
-div.innerText=name
-
-div.onclick=()=>{
-
-window.location.href="/player.html?name="+name
-
-}
-
-list.appendChild(div)
-
-})
-
-}
-
-document.addEventListener("DOMContentLoaded",loadRecentRunners)
-
-</script>
+    renderRecentRunners();
+  </script>
 
 </body>
-
 </html>
