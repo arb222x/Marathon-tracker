@@ -5,31 +5,215 @@
 
 <title>Login</title>
 
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+background:#020304;
+color:white;
+}
+
+/* BACKGROUND */
+
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-image:url("background.jpg");
+background-size:cover;
+background-position:center;
+filter:blur(6px) brightness(20%);
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.65);
+z-index:-1;
+}
+
+/* NAV */
+
+.topNav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:28px 90px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.navLeft{display:flex;gap:90px;}
+.navRight{display:flex;gap:70px;}
+
+.topNav a{
+color:#00ff9c;
+text-decoration:none;
+font-weight:600;
+font-size:16px;
+}
+
+.topNav a:hover{
+color:white;
+}
+
+/* CENTER PANEL */
+
+.container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:75vh;
+}
+
+.panel{
+
+width:420px;
+
+background:#0f141b;
+
+border:1px solid #1c232b;
+
+border-radius:10px;
+
+padding:40px;
+
+box-shadow:0 0 25px rgba(0,0,0,0.6);
+
+text-align:center;
+
+}
+
+.title{
+
+font-size:34px;
+
+color:#00ff9c;
+
+margin-bottom:35px;
+
+}
+
+/* INPUTS */
+
+input{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:18px;
+
+background:#0b0f14;
+
+border:1px solid #1c232b;
+
+color:white;
+
+font-size:16px;
+
+}
+
+/* BUTTON */
+
+button{
+
+width:100%;
+
+padding:14px;
+
+background:#00ff9c;
+
+border:none;
+
+font-weight:700;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+button:hover{
+
+background:#00e589;
+
+}
+
+/* LINK */
+
+.link{
+
+margin-top:18px;
+
+font-size:14px;
+
+opacity:0.7;
+
+}
+
+.link a{
+
+color:#00ff9c;
+
+text-decoration:none;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
+<div class="background"></div>
+<div class="overlay"></div>
+
 <nav class="topNav">
 
 <div class="navLeft">
 <a href="/">Home</a>
+<a href="/recent.html">Recent Runners</a>
 </div>
 
-<div class="navRight"></div>
+<div class="navRight">
+<a href="/login.html">Login</a>
+<a href="/signup.html">Create Account</a>
+</div>
 
 </nav>
 
-<div class="authBox">
+<div class="container">
 
-<h1>Login</h1>
+<div class="panel">
+
+<div class="title">Runner Login</div>
 
 <input id="email" placeholder="Email">
 
 <input id="password" type="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
+
+<div class="link">
+
+No account? <a href="/signup.html">Create one</a>
+
+</div>
+
+</div>
 
 </div>
 
