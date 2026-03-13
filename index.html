@@ -45,16 +45,20 @@ body{
   z-index:-2;
 }
 
-/* BOTTOM SOFT FLICKERING GLOW */
+/* BOTTOM SOFT FLICKERING GLOW - smooth version */
 body::after {
   content: "";
   position: fixed;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:120%;
-  height:300px;
-  background: radial-gradient(circle at bottom center, rgba(0,255,156,0.1) 0%, rgba(0,255,156,0) 90%);
+  width:150%;        
+  height:400px;      
+  background: radial-gradient(circle at bottom center, 
+                              rgba(0,255,156,0.12) 0%, 
+                              rgba(0,255,156,0.08) 30%, 
+                              rgba(0,255,156,0.03) 60%, 
+                              rgba(0,255,156,0) 100%);
   pointer-events: none;
   z-index:-1;
   animation: flicker 3s infinite;
