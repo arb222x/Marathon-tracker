@@ -17,6 +17,8 @@ body{
   font-weight:600;
   background:#020304;
   color:white;
+  position:relative;
+  overflow-x:hidden;
 }
 
 /* BACKGROUND */
@@ -30,7 +32,7 @@ body{
   background-size:cover;
   background-position:center;
   filter:blur(10px) brightness(15%);
-  z-index:-2;
+  z-index:-3;
 }
 
 .overlay{
@@ -40,7 +42,29 @@ body{
   width:100%;
   height:100%;
   background:rgba(0,0,0,.75);
+  z-index:-2;
+}
+
+/* BOTTOM FLICKER GLOW */
+body::after {
+  content: "";
+  position: fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:200px;
+  background: radial-gradient(circle, rgba(0,255,156,0.15) 0%, transparent 80%);
+  pointer-events: none;
   z-index:-1;
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.15; }
+  25% { opacity: 0.25; }
+  50% { opacity: 0.12; }
+  75% { opacity: 0.22; }
 }
 
 /* NAVBAR */
@@ -79,7 +103,6 @@ body{
   animation: bounceTitle 1s ease;
 }
 
-/* Bounce keyframes */
 @keyframes bounceTitle {
   0% { transform: translateY(-50px); }
   30% { transform: translateY(20px); }
@@ -150,6 +173,7 @@ body{
   color:#00ff9c;
   font-weight:800;
   overflow-x:auto;
+  transition: box-shadow 0.3s ease;
 }
 
 /* FOOTER */
