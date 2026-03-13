@@ -21,7 +21,7 @@ body{
   overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* BACKGROUND IMAGE */
 .background{
   position:fixed;
   top:0;
@@ -35,6 +35,7 @@ body{
   z-index:-3;
 }
 
+/* DARK OVERLAY */
 .overlay{
   position:fixed;
   top:0;
@@ -45,30 +46,25 @@ body{
   z-index:-2;
 }
 
-/* BOTTOM SOFT FLICKERING GLOW - smooth version */
-body::after {
-  content: "";
-  position: fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:150%;        
-  height:400px;      
-  background: radial-gradient(circle at bottom center, 
-                              rgba(0,255,156,0.12) 0%, 
-                              rgba(0,255,156,0.08) 30%, 
-                              rgba(0,255,156,0.03) 60%, 
-                              rgba(0,255,156,0) 100%);
-  pointer-events: none;
+/* FULL SCREEN AMBIENT GLOW */
+body::before {
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at center, rgba(0,255,156,0.08) 0%, rgba(0,255,156,0) 70%);
+  pointer-events:none;
   z-index:-1;
-  animation: flicker 3s infinite;
+  animation: ambientFlicker 4s infinite;
 }
 
-@keyframes flicker {
-  0%, 100% { opacity: 0.1; }
-  25% { opacity: 0.15; }
-  50% { opacity: 0.08; }
-  75% { opacity: 0.13; }
+@keyframes ambientFlicker {
+  0%,100% { opacity:0.08; }
+  25% { opacity:0.12; }
+  50% { opacity:0.06; }
+  75% { opacity:0.1; }
 }
 
 /* NAVBAR */
