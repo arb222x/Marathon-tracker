@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Search Profiles</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+background:#020304;
+font-family:'Orbitron',sans-serif;
+color:white;
+text-align:center;
+}
+
+.search{
+margin-top:150px;
+}
+
+input{
+padding:14px;
+width:320px;
+background:#0b0f14;
+border:1px solid #1c232b;
+color:white;
+}
+
+button{
+padding:14px 20px;
+background:#00ff9c;
+border:none;
+cursor:pointer;
+}
+
+.results{
+margin-top:40px;
+}
+
+.profile{
+margin-top:10px;
+cursor:pointer;
+color:#00ff9c;
+}
+
+.home{
+position:absolute;
+top:25px;
+left:25px;
+color:#00ff9c;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a class="home" href="/">Home</a>
+
+<div class="search">
+
+<input id="profileSearch" placeholder="Search Username">
+
+<button onclick="searchProfiles()">Search</button>
+
+</div>
+
+<div class="results" id="results"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
+```
