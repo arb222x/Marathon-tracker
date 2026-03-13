@@ -166,3 +166,10 @@ color:#00ff9c;
 letter-spacing:1px;
 
 }
+
+background-image:url("background.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+}
