@@ -1,7 +1,6 @@
 ```html
 <!DOCTYPE html>
 <html>
-
 <head>
 
 <title>Login</title>
@@ -123,7 +122,7 @@ button:hover{
 background:#00e589;
 }
 
-/* LINK */
+/* SMALL LINK */
 
 .small-link{
 margin-top:20px;
@@ -173,12 +172,11 @@ Don't have an account? <a href="/signup.html">Create one</a>
 
 <script>
 
-const SUPABASE_URL = "https://kplcjgvajraauhrxbwuy.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0Jrq8turs2izTX5UkyhmWfYfOk"
+const SUPABASE_URL="https://kplcjgvajraauhrxbwuy.supabase.co"
 
-const client = supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0Jrq8turs2izTX5UkyhmWfYfOk"
 
-/* LOGIN FUNCTION */
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 
 async function login(){
 
@@ -203,22 +201,6 @@ window.location.href="/"
 }
 
 }
-
-/* CHECK SESSION */
-
-async function checkUser(){
-
-const {data:{session}} = await client.auth.getSession()
-
-if(!session){
-
-window.location.href="/"
-
-}
-
-}
-
-checkUser()
 
 </script>
 
