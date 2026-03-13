@@ -1,156 +1,319 @@
-const SUPABASE_URL="https://kplcjgvajraauhrxbwuy.supabase.co"
+/* -------------------------
+SUPABASE CONNECTION
+------------------------- */
 
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0Jrq8turs2izTX5UkyhmWfYfOk"
+const SUPABASE_URL = "https://kplcjgvajraauhrxbwuy.supabase.co"
+
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwbGNqZ3ZhanJhYXVocnhid3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDc0MTYsImV4cCI6MjA4ODk4MzQxNn0.gWq-46gGGCUc3iDZR0qjurs2izTX5UkyhmWfYfYfOk"
+
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 
+
+/* -------------------------
+PLAYER SEARCH
+------------------------- */
 
 function searchPlayer(){
 
-const name=document.getElementById("playerName").value
+const player = document.getElementById("playerName").value
 
-if(!name) return
+if(!player) return
 
-window.location="/runner/"+encodeURIComponent(name)
+saveRecentRunner(player)
 
-}
-
-
-
-async function signup(){
-
-const email=document.getElementById("email").value
-const password=document.getElementById("password").value
-
-await fetch(
-
-SUPABASE_URL+"/auth/v1/signup",
-
-{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json",
-apikey:SUPABASE_KEY
-},
-
-body:JSON.stringify({
-email:email,
-password:password
-})
-
-})
-
-alert("Account created")
+window.location.href = "/player.html?name=" + player
 
 }
 
 
 
-async function login(){
+/* -------------------------
+SAVE RECENT SEARCHES
+------------------------- */
 
-const email=document.getElementById("email").value
-const password=document.getElementById("password").value
+function saveRecentRunner(player){
 
-const res=await fetch(
+let recent = JSON.parse(localStorage.getItem("recentRunners")) || []
 
-SUPABASE_URL+"/auth/v1/token?grant_type=password",
+recent = recent.filter(p => p !== player)
 
-{
+recent.unshift(player)
 
-method:"POST",
+recent = recent.slice(0,10)
 
-headers:{
-"Content-Type":"application/json",
-apikey:SUPABASE_KEY
-},
-
-body:JSON.stringify({
-email:email,
-password:password
-})
-
-})
-
-const data=await res.json()
-
-localStorage.setItem("token",data.access_token)
-
-window.location="/"
+localStorage.setItem("recentRunners", JSON.stringify(recent))
 
 }
 
 
 
-function logout(){
+/* -------------------------
+LOAD RECENT RUNNERS PAGE
+------------------------- */
 
-localStorage.removeItem("token")
+function loadRecentRunners(){
 
-location.reload()
+const list = document.getElementById("recentList")
+
+if(!list) return
+
+const runners = JSON.parse(localStorage.getItem("recentRunners")) || []
+
+if(runners.length === 0){
+
+list.innerHTML = "<div class='empty'>No runners searched yet</div>"
+
+return
+
+}
+
+list.innerHTML = ""
+
+runners.forEach(name => {
+
+const div = document.createElement("div")
+
+div.className = "runner"
+
+div.innerText = name
+
+div.onclick = () => {
+
+window.location.href = "/player.html?name=" + name
+
+}
+
+list.appendChild(div)
+
+})
 
 }
 
 
 
-function updateAuthUI(){
+/* -------------------------
+LOAD PLAYER STATS
+------------------------- */
 
-const nav=document.getElementById("navAuth")
+async function loadPlayer(){
 
-if(!nav) return
+const params = new URLSearchParams(window.location.search)
 
-const token=localStorage.getItem("token")
+const player = params.get("name")
 
-if(token){
+if(!player) return
 
-nav.innerHTML=`
+const nameBox = document.getElementById("playerNameDisplay")
 
-<a href="/profile.html">My Profile</a>
-<a href="#" onclick="logout()">Logout</a>
+if(nameBox) nameBox.innerText = player
+
+
+
+const { data, error } = await client
+
+.from("players")
+
+.select("*")
+
+.eq("name", player)
+
+.single()
+
+
+
+if(error){
+
+console.log(error)
+
+return
+
+}
+
+
+
+/* PLAYER STATS */
+
+if(document.getElementById("kills"))
+document.getElementById("kills").innerText = data.kills || 0
+
+if(document.getElementById("deaths"))
+document.getElementById("deaths").innerText = data.deaths || 0
+
+if(document.getElementById("matches"))
+document.getElementById("matches").innerText = data.matches || 0
+
+if(document.getElementById("extractions"))
+document.getElementById("extractions").innerText = data.extractions || 0
+
+if(document.getElementById("kd"))
+document.getElementById("kd").innerText = data.kd || "0.0"
+
+}
+
+
+
+/* -------------------------
+LOAD LEADERBOARD
+------------------------- */
+
+async function loadLeaderboard(){
+
+const board = document.getElementById("leaderboard")
+
+if(!board) return
+
+const { data } = await client
+
+.from("players")
+
+.select("*")
+
+.order("kills",{ascending:false})
+
+.limit(10)
+
+
+
+board.innerHTML = ""
+
+
+
+data.forEach(player => {
+
+const row = document.createElement("div")
+
+row.className = "leaderRow"
+
+row.innerHTML = `
+
+<span>${player.name}</span>
+<span>${player.kills} Kills</span>
 
 `
 
-}
+row.onclick = () => {
+
+window.location.href = "/player.html?name=" + player.name
 
 }
 
-
-
-async function saveProfile(){
-
-const username=document.getElementById("username").value
-const bio=document.getElementById("bio").value
-const favorite=document.getElementById("favorite_runner").value
-
-await fetch(
-
-SUPABASE_URL+"/rest/v1/profiles",
-
-{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json",
-apikey:SUPABASE_KEY,
-Authorization:"Bearer "+localStorage.getItem("token")
-},
-
-body:JSON.stringify({
-username:username,
-bio:bio,
-favorite_runner:favorite
-})
+board.appendChild(row)
 
 })
 
-alert("Profile saved")
+}
+
+
+
+/* -------------------------
+MOST POPULAR WEAPONS
+------------------------- */
+
+async function loadWeaponStats(){
+
+const container = document.getElementById("weaponStats")
+
+if(!container) return
+
+const { data } = await client
+
+.from("weapons")
+
+.select("*")
+
+.order("kills",{ascending:false})
+
+.limit(5)
+
+
+
+container.innerHTML = ""
+
+
+
+data.forEach(w => {
+
+const row = document.createElement("div")
+
+row.className = "weaponRow"
+
+row.innerHTML = `
+
+<span>${w.weapon}</span>
+<span>${w.kills} kills</span>
+
+`
+
+container.appendChild(row)
+
+})
 
 }
 
 
 
-document.addEventListener("DOMContentLoaded",()=>{
+/* -------------------------
+EXTRACTION STATS
+------------------------- */
 
-updateAuthUI()
+async function loadExtractionStats(){
+
+const container = document.getElementById("extractionStats")
+
+if(!container) return
+
+const { data } = await client
+
+.from("players")
+
+.select("*")
+
+.order("extractions",{ascending:false})
+
+.limit(5)
+
+
+
+container.innerHTML = ""
+
+
+
+data.forEach(p => {
+
+const row = document.createElement("div")
+
+row.className = "extractRow"
+
+row.innerHTML = `
+
+<span>${p.name}</span>
+<span>${p.extractions} extractions</span>
+
+`
+
+container.appendChild(row)
+
+})
+
+}
+
+
+
+/* -------------------------
+AUTO LOAD FEATURES
+------------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+loadRecentRunners()
+
+loadPlayer()
+
+loadLeaderboard()
+
+loadWeaponStats()
+
+loadExtractionStats()
 
 })
