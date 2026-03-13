@@ -7,13 +7,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
 font-family:'Orbitron',sans-serif;
+font-weight:600;
 background:#020304;
 color:white;
 }
@@ -29,7 +30,7 @@ height:100%;
 background-image:url("background.jpg");
 background-size:cover;
 background-position:center;
-filter:blur(12px) brightness(10%);
+filter:blur(10px) brightness(15%);
 z-index:-2;
 }
 
@@ -43,28 +44,36 @@ background:rgba(0,0,0,.75);
 z-index:-1;
 }
 
-/* NAV */
+/* NAVBAR */
 
 .nav{
 display:flex;
 justify-content:space-between;
-padding:25px 50px;
+padding:25px 60px;
+font-weight:800;
 }
 
 .nav a{
-color:white;
-text-decoration:none;
-margin-right:30px;
-opacity:.85;
-}
 
-.nav-right a{
-color:#00ff9c;
-margin-left:20px;
+text-decoration:none;
+margin-right:35px;
+color:white;
+
+transition:.25s;
+
 }
 
 .nav a:hover{
-opacity:1;
+
+color:#00ff9c;
+text-shadow:0 0 12px #00ff9c;
+
+}
+
+.nav-right a{
+
+margin-left:25px;
+
 }
 
 /* HERO */
@@ -75,53 +84,97 @@ margin-top:150px;
 }
 
 .title{
-font-size:72px;
-letter-spacing:6px;
+
+font-size:80px;
+
+letter-spacing:8px;
+
 color:#00ff9c;
+
+text-shadow:0 0 25px #00ff9c;
+
 }
 
 .subtitle{
-opacity:.6;
+
+opacity:.7;
 margin-top:10px;
+
 }
 
 /* SEARCH */
 
 .search{
+
 margin-top:50px;
+
 display:flex;
 justify-content:center;
+
 }
 
 .search input{
-width:380px;
+
+width:400px;
+
 padding:16px;
+
 background:#0b0f14;
+
 border:1px solid #1c232b;
+
 color:white;
+
 border-radius:6px 0 0 6px;
+
 }
 
 .search button{
-padding:16px 25px;
+
+padding:16px 30px;
+
 border:none;
+
 background:#00ff9c;
-font-weight:700;
+
+font-weight:800;
+
 cursor:pointer;
+
 border-radius:0 6px 6px 0;
+
 }
 
 .search button:hover{
-background:#00e589;
+
+box-shadow:0 0 15px #00ff9c;
+
 }
 
+/* FOOTER */
+
 .footer{
+
 position:fixed;
+
 bottom:20px;
+
 width:100%;
+
 text-align:center;
+
 font-size:12px;
+
 opacity:.5;
+
+}
+
+.footer:hover{
+
+opacity:.9;
+
+text-shadow:0 0 10px #00ff9c;
+
 }
 
 </style>
@@ -138,6 +191,7 @@ opacity:.5;
 <div>
 
 <a href="/">Home</a>
+<a href="/recent.html">Recent Runners</a>
 <a href="/profilesearch.html">Search Profiles</a>
 
 </div>
