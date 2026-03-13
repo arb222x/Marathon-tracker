@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Marathon Tracker GG</title>
+<title>Marathon Tracker</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,7 +29,7 @@ height:100%;
 background-image:url("background.jpg");
 background-size:cover;
 background-position:center;
-filter:blur(10px) brightness(12%);
+filter:blur(12px) brightness(10%);
 z-index:-2;
 }
 
@@ -39,159 +39,89 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,.75);
 z-index:-1;
 }
 
-/* NAVBAR */
+/* NAV */
 
 .nav{
-
 display:flex;
 justify-content:space-between;
-
-padding:25px 40px;
-
-font-size:16px;
-
+padding:25px 50px;
 }
 
-.nav-left a{
-
-margin-right:30px;
-
-text-decoration:none;
-
+.nav a{
 color:white;
-
+text-decoration:none;
+margin-right:30px;
 opacity:.85;
-
 }
 
 .nav-right a{
-
-margin-left:25px;
-
-text-decoration:none;
-
 color:#00ff9c;
-
+margin-left:20px;
 }
 
 .nav a:hover{
-
 opacity:1;
-
 }
 
 /* HERO */
 
 .hero{
-
 text-align:center;
-
-margin-top:140px;
-
+margin-top:150px;
 }
 
-/* TITLE */
-
 .title{
-
-font-size:70px;
-
+font-size:72px;
 letter-spacing:6px;
-
 color:#00ff9c;
-
-margin-bottom:10px;
-
 }
 
 .subtitle{
-
-font-size:22px;
-
-opacity:.7;
-
-margin-bottom:40px;
-
+opacity:.6;
+margin-top:10px;
 }
 
 /* SEARCH */
 
-.search-box{
-
+.search{
+margin-top:50px;
 display:flex;
-
 justify-content:center;
-
 }
 
-.search-box input{
-
+.search input{
 width:380px;
-
 padding:16px;
-
-border:none;
-
 background:#0b0f14;
-
 border:1px solid #1c232b;
-
 color:white;
-
-font-size:16px;
-
 border-radius:6px 0 0 6px;
-
 }
 
-.search-box button{
-
-padding:16px 24px;
-
+.search button{
+padding:16px 25px;
 border:none;
-
 background:#00ff9c;
-
 font-weight:700;
-
 cursor:pointer;
-
 border-radius:0 6px 6px 0;
-
 }
 
-.search-box button:hover{
-
+.search button:hover{
 background:#00e589;
-
 }
-
-/* FOOTER */
 
 .footer{
-
 position:fixed;
-
 bottom:20px;
-
 width:100%;
-
 text-align:center;
-
 font-size:12px;
-
 opacity:.5;
-
-}
-
-.footer:hover{
-
-opacity:.8;
-
 }
 
 </style>
@@ -203,14 +133,12 @@ opacity:.8;
 <div class="background"></div>
 <div class="overlay"></div>
 
-<!-- NAVIGATION -->
-
 <div class="nav">
 
-<div class="nav-left">
+<div>
 
 <a href="/">Home</a>
-<a href="/recent.html">Recent Runners</a>
+<a href="/profilesearch.html">Search Profiles</a>
 
 </div>
 
@@ -226,15 +154,13 @@ opacity:.8;
 
 </div>
 
-<!-- HERO -->
-
 <div class="hero">
 
 <div class="title">MARATHON TRACKER</div>
 
 <div class="subtitle">Search Runner Stats</div>
 
-<div class="search-box">
+<div class="search">
 
 <input id="playerName" placeholder="Search Runner">
 
@@ -244,19 +170,15 @@ opacity:.8;
 
 </div>
 
-<!-- FOOTER -->
-
 <div class="footer">
 
-Not affiliated with Bungie or Marathon.
+Not affiliated with Bungie.
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
 <script src="app.js"></script>
 
 </body>
-
 </html>
 ```
