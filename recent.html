@@ -7,16 +7,57 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+
+/* PAGE */
 
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#05070a;
+font-family:'Orbitron',sans-serif;
+background:#020304;
 color:white;
 }
 
-/* NAV */
+/* BACKGROUND */
+
+.background{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background-image:url("background.jpg");
+
+background-size:cover;
+background-position:center;
+
+filter:blur(6px) brightness(20%);
+
+z-index:-2;
+
+}
+
+.overlay{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.65);
+
+z-index:-1;
+
+}
+
+/* NAV BAR */
 
 .topNav{
 
@@ -24,27 +65,35 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 
-padding:25px 80px;
+padding:28px 90px;
 
 border-bottom:1px solid rgba(255,255,255,0.05);
 
 }
 
-.navLeft{display:flex;gap:70px;}
+.navLeft{display:flex;gap:90px;}
 
-.navRight{display:flex;gap:60px;}
+.navRight{display:flex;gap:70px;}
 
 .topNav a{
 
 color:#00ff9c;
+
 text-decoration:none;
+
 font-weight:600;
-font-size:17px;
+
+font-size:16px;
+
 transition:0.25s;
 
 }
 
-.topNav a:hover{color:white;}
+.topNav a:hover{
+
+color:white;
+
+}
 
 /* PAGE CENTER */
 
@@ -54,7 +103,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 
-margin-top:120px;
+margin-top:150px;
 
 }
 
@@ -62,13 +111,19 @@ margin-top:120px;
 
 .title{
 
-font-size:46px;
+font-size:44px;
+
 color:#00ff9c;
+
+letter-spacing:3px;
+
 margin-bottom:40px;
+
+text-shadow:0 0 15px rgba(0,255,156,0.35);
 
 }
 
-/* BOX */
+/* RUNNERS BOX */
 
 .runnersBox{
 
@@ -82,15 +137,15 @@ border-radius:8px;
 
 padding:25px;
 
-box-shadow:0 0 20px rgba(0,0,0,0.4);
+box-shadow:0 0 20px rgba(0,0,0,0.5);
 
 }
 
-/* RUNNER */
+/* RUNNER ITEM */
 
 .runner{
 
-padding:14px;
+padding:15px;
 
 border-bottom:1px solid #1a1f26;
 
@@ -98,9 +153,15 @@ cursor:pointer;
 
 transition:0.2s;
 
+font-size:18px;
+
 }
 
-.runner:last-child{border-bottom:none;}
+.runner:last-child{
+
+border-bottom:none;
+
+}
 
 .runner:hover{
 
@@ -110,11 +171,45 @@ color:#00ff9c;
 
 }
 
+/* EMPTY TEXT */
+
 .empty{
 
-opacity:0.5;
+text-align:center;
+
+opacity:0.6;
+
+}
+
+/* FOOTER */
+
+footer{
+
+position:absolute;
+
+bottom:30px;
+
+width:100%;
 
 text-align:center;
+
+opacity:0.6;
+
+font-size:14px;
+
+transition:0.3s;
+
+cursor:pointer;
+
+}
+
+footer:hover{
+
+opacity:1;
+
+color:#00ff9c;
+
+letter-spacing:1px;
 
 }
 
@@ -123,6 +218,9 @@ text-align:center;
 </head>
 
 <body>
+
+<div class="background"></div>
+<div class="overlay"></div>
 
 <nav class="topNav">
 
@@ -148,53 +246,17 @@ text-align:center;
 
 <h1 class="title">Recently Searched Runners</h1>
 
-<div class="runnersBox" id="recentList">
+<div class="runnersBox" id="recentList"></div>
 
 </div>
 
-</div>
+<footer>
 
-<script>
+Not affiliated with Marathon.
 
-function loadRecent(){
+</footer>
 
-const list=document.getElementById("recentList")
-
-const runners=JSON.parse(localStorage.getItem("recentRunners")) || []
-
-if(runners.length===0){
-
-list.innerHTML="<div class='empty'>No runners searched yet</div>"
-
-return
-
-}
-
-list.innerHTML=""
-
-runners.forEach(name=>{
-
-const div=document.createElement("div")
-
-div.className="runner"
-
-div.innerText=name
-
-div.onclick=()=>{
-
-window.location.href="/player.html?name="+name
-
-}
-
-list.appendChild(div)
-
-})
-
-}
-
-loadRecent()
-
-</script>
+<script src="app.js"></script>
 
 </body>
 
