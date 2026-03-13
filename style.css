@@ -1,166 +1,199 @@
-body{
-
-background:#05070a;
-color:white;
-font-family:Arial, sans-serif;
-margin:0;
-
-/* background overlay for hero page */
-
-background-image: radial-gradient(circle at top,#0b1118 0%,#05070a 60%);
-
+/* ===========================
+   GLOBAL STYLES
+=========================== */
+* {
+    box-sizing: border-box;
+    transition: all 0.25s ease-in-out;
 }
 
-
-
-/* NAVIGATION */
-
-.topNav{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:24px 60px;
-
-background:#0b0f14;
-
-border-bottom:1px solid #111;
-
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    background: #010104;
+    color: #fff;
+    overflow-x: hidden;
 }
 
-.navLeft{
-
-display:flex;
-gap:70px;   /* spacing between Home + Recent */
-
+/* BACKGROUND IMAGE & EFFECTS */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px) brightness(15%);
+    z-index: -2;
+    animation: subtleLightning 8s infinite;
 }
 
-.navRight{
-
-display:flex;
-gap:60px;   /* spacing between Login + Create */
-
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: -1;
 }
 
-.topNav a{
-
-color:#00ff9c;
-
-text-decoration:none;
-
-font-weight:600;
-
-font-size:17px;
-
-transition:0.2s;
-
+/* ===========================
+   NAVIGATION
+=========================== */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
 }
 
-.topNav a:hover{
-
-color:#ffffff;
-
+.nav a {
+    text-decoration: none;
+    color: #00ff9c;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-right: 25px;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
-
-
-/* HERO */
-
-.hero{
-
-text-align:center;
-
-margin-top:180px;
-
+.nav a:hover {
+    color: #00ff9c;
+    text-shadow: 0 0 12px #00ff9c, 0 0 20px #00ff9c;
 }
 
-.mainTitle{
-
-font-size:72px;
-
-color:#00ff9c;
-
-letter-spacing:3px;
-
-margin-bottom:50px;
-
+.nav a svg {
+    margin-right: 8px;
+    fill: #00ff9c;
 }
 
-
-
-/* SEARCH */
-
-.searchBox{
-
-display:flex;
-justify-content:center;
-gap:12px;
-
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero {
+    text-align: center;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-.searchBox input{
-
-padding:16px;
-
-width:320px;
-
-background:#0f141b;
-
-border:1px solid #1c232b;
-
-color:white;
-
-font-size:18px;
-
+.title {
+    font-size: 72px;
+    letter-spacing: 8px;
+    color: #00ff9c;
+    text-shadow: 0 0 25px #00ff9c, 0 0 40px #00ff9c;
+    margin-bottom: 20px;
+    animation: titleBounce 1s ease-out forwards;
 }
 
-.searchBox button{
-
-padding:16px 24px;
-
-background:#00ff9c;
-
-border:none;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:0.2s;
-
+.subtitle {
+    font-size: 20px;
+    opacity: 0.75;
 }
 
-.searchBox button:hover{
-
-background:#00e589;
-
+/* ===========================
+   SEARCH BAR
+=========================== */
+.search {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
-
-
-/* FOOTER */
-
-footer{
-
-text-align:center;
-
-margin-top:220px;
-
-opacity:0.5;
-
-font-size:14px;
-
-transition:0.3s;
-
-cursor:pointer;
-
+.search input {
+    width: 400px;
+    padding: 16px;
+    background: rgba(11,15,20,0.85);
+    border: 1px solid #1c232b;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    box-shadow: 0 0 15px rgba(0,255,156,0.2);
 }
 
-footer:hover{
+.search input:focus {
+    border-color: #00ff9c;
+    box-shadow: 0 0 20px #00ff9c;
+}
 
-opacity:1;
+.search button {
+    padding: 16px 30px;
+    border: none;
+    background: #00ff9c;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 0 15px rgba(0,255,156,0.4);
+    font-size: 16px;
+}
 
-color:#00ff9c;
+.search button:hover {
+    box-shadow: 0 0 25px #00ff9c, 0 0 40px rgba(0,255,156,0.4);
+    transform: translateY(-2px);
+}
 
-letter-spacing:1px;
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.5;
+    padding: 15px 0;
+}
+
+.footer:hover {
+    opacity: 0.9;
+    text-shadow: 0 0 12px #00ff9c;
+    cursor: default;
+}
+
+/* Hover glow effect for footer text */
+.footer:hover {
+    color: #00ff9c;
+}
+
+/* ===========================
+   RECENT RUNNERS BOX
+=========================== */
+.recent-box {
+    width: 420px;
+    max-width: 90%;
+    padding: 15px;
+    margin-top: 30px;
+    background: rgba(11, 15, 20, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 156, 0.3);
+    font-weight: 800;
+    text-align: center;
+    color: #00ff9c;
+    font-size: 16px;
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+@keyframes titleBounce {
+    0% { transform: translateY(-50px); opacity: 0; }
+    50% { transform: translateY(10px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes subtleLightning {
+    0%,100% { filter: blur(12px) brightness(15%); }
+    50% { filter: blur(10px) brightness(20%); }
+}
