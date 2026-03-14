@@ -18,57 +18,54 @@ color:white;
 }
 
 /* NAV */
+
 .nav{
 position:absolute;
 top:30px;
 left:40px;
-}
-
-.home-btn{
-position:relative;
 display:flex;
 align-items:center;
+gap:25px;
+z-index:5;
 }
 
-.home-btn svg{
-width:32px;
-height:32px;
-stroke:white;
-transition:.25s;
+.nav a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:white;
+font-size:14px;
+letter-spacing:1px;
 }
 
-.home-btn:hover svg{
-stroke:#00ff9c;
-filter:drop-shadow(0 0 8px #00ff9c);
-}
-
-/* TOOLTIP */
-.home-btn::after{
-content:"Home";
-position:absolute;
-top:42px;
-left:50%;
-transform:translateX(-50%);
-background:#0b0f14;
+.nav a:hover{
 color:#00ff9c;
-font-size:12px;
-padding:4px 8px;
-border-radius:6px;
-opacity:0;
-transition:.2s;
-white-space:nowrap;
 }
 
-.home-btn:hover::after{
-opacity:1;
+/* HOME ICON FIX */
+
+.home-icon{
+width:26px;
+height:26px;
+stroke:white;
+fill:none;
+stroke-width:2;
+transition:.2s;
+}
+
+.nav a:hover .home-icon{
+stroke:#00ff9c;
+filter:drop-shadow(0 0 6px #00ff9c);
 }
 
 /* HERO */
+
 .hero{
 display:flex;
 flex-direction:column;
 align-items:center;
-margin-top:150px;
+margin-top:160px;
 }
 
 .title{
@@ -78,13 +75,17 @@ color:#00ff9c;
 text-shadow:0 0 30px #00ff9c;
 }
 
+/* RECENT CONTAINER */
+
 .recent-container{
-margin-top:60px;
+margin-top:50px;
 display:flex;
 flex-direction:column;
 gap:15px;
 width:350px;
 }
+
+/* RUNNER BOX */
 
 .runner-box{
 background:#0b0f14;
@@ -92,7 +93,7 @@ padding:15px;
 border-radius:10px;
 text-align:center;
 cursor:pointer;
-box-shadow:0 0 20px rgba(0,255,156,.2);
+box-shadow:0 0 20px rgba(0,255,156,.25);
 color:#00ff9c;
 font-weight:800;
 }
@@ -101,6 +102,8 @@ font-weight:800;
 box-shadow:0 0 25px #00ff9c;
 }
 
+/* EMPTY */
+
 .no-runners{
 background:#220000;
 padding:15px;
@@ -108,6 +111,26 @@ border-radius:10px;
 text-align:center;
 color:#ff4d4d;
 }
+
+/* CLEAR BUTTON */
+
+.clear-btn{
+margin-top:20px;
+background:#111;
+border:1px solid #444;
+color:#aaa;
+padding:10px 18px;
+border-radius:8px;
+cursor:pointer;
+font-family:'Orbitron',sans-serif;
+}
+
+.clear-btn:hover{
+border-color:#ff4d4d;
+color:#ff4d4d;
+}
+
+/* FOOTER */
 
 .footer{
 position:fixed;
@@ -127,16 +150,21 @@ opacity:.5;
 <div class="background"></div>
 <div class="overlay"></div>
 
+<!-- NAV -->
+
 <div class="nav">
-<a href="/" class="home-btn">
 
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-<path stroke-linecap="round" stroke-linejoin="round"
-d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
+<a href="/">
 
+<svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path d="M3 11L12 4l9 7"/>
+<path d="M5 10v10h14V10"/>
 </svg>
 
 </a>
+
+<a href="/recent.html">Recent Runners</a>
+
 </div>
 
 <div class="hero">
@@ -144,6 +172,8 @@ d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
 <div class="title">Recently Searched</div>
 
 <div class="recent-container" id="recentContainer"></div>
+
+<button class="clear-btn" onclick="clearRecent()">Clear Recent</button>
 
 </div>
 
@@ -155,6 +185,10 @@ Not affiliated with Bungie.
 
 const container=document.getElementById("recentContainer");
 
+function renderRecent(){
+
+container.innerHTML="";
+
 let recent=JSON.parse(localStorage.getItem("recentRunners"))||[];
 
 if(recent.length===0){
@@ -165,7 +199,8 @@ empty.textContent="No recent searches";
 
 container.appendChild(empty);
 
-}else{
+return;
+}
 
 recent.forEach(name=>{
 
@@ -182,6 +217,16 @@ container.appendChild(box);
 });
 
 }
+
+function clearRecent(){
+
+localStorage.removeItem("recentRunners");
+
+renderRecent();
+
+}
+
+renderRecent();
 
 </script>
 
