@@ -5,157 +5,197 @@
 <title>Marathon Tracker - Player Stats</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 600;
-  background: #020304;
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow-x: hidden;
+
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+background:#020304;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
 }
 
-/* BACKGROUND IMAGE */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: blur(12px) brightness(15%);
-  z-index: -2;
+/* BACKGROUND */
+
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-image:url("background.jpg");
+background-size:cover;
+background-position:center;
+filter:blur(14px) brightness(15%);
+z-index:-2;
 }
 
-/* DARK OVERLAY */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .75);
-  z-index: -1;
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+z-index:-1;
 }
 
-/* NAVBAR */
-.nav {
-  display: flex;
-  align-items: center;
-  padding: 20px 40px;
-  font-weight: 800;
-  position: relative;
-  z-index: 1;
+/* NAV */
+
+.nav{
+display:flex;
+align-items:center;
+gap:25px;
+padding:25px 40px;
 }
 
-.nav a {
-  text-decoration: none;
-  color: #00ff9c;
-  display: flex;
-  align-items: center;
-  transition: 0.25s;
+.nav a{
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+color:white;
+font-weight:700;
 }
 
-.nav a:hover {
-  text-shadow: 0 0 15px #00ff9c;
+.home-icon{
+width:26px;
+height:26px;
+stroke:white;
+fill:none;
+stroke-width:2;
+transition:.2s;
 }
 
-.nav a svg {
-  margin-right: 8px;
-  fill: #00ff9c;
+.nav a:hover .home-icon{
+stroke:#00ff9c;
+filter:drop-shadow(0 0 8px #00ff9c);
 }
 
 /* HERO */
-.hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  position: relative;
-  z-index: 1;
+
+.hero{
+width:100%;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
-.title {
-  font-size: 64px;
-  letter-spacing: 6px;
-  color: #00ff9c;
-  text-shadow: 0 0 25px #00ff9c;
-  margin-bottom: 40px;
-  text-align: center;
-  transition: transform 0.5s;
+.title{
+font-size:64px;
+letter-spacing:5px;
+color:#00ff9c;
+text-shadow:0 0 20px #00ff9c;
+margin-bottom:40px;
+text-align:center;
 }
 
-.title:hover {
-  transform: scale(1.05);
+/* TOP STATS */
+
+.top-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:50px;
 }
 
-/* STAT CARDS CONTAINER */
-.stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  width: 90%;
-  max-width: 1000px;
+.big-stat{
+background:rgba(10,14,18,.9);
+padding:30px;
+border-radius:18px;
+text-align:center;
+border:1px solid rgba(0,255,156,.3);
+box-shadow:0 8px 30px rgba(0,255,156,.25);
+transition:.25s;
 }
 
-/* STAT CARD */
-.stat-card {
-  background: rgba(11, 15, 20, 0.8);
-  border-radius: 20px;
-  padding: 25px 20px;
-  width: 270px;
-  box-shadow: 0 8px 30px rgba(0, 255, 156, 0.4), inset 0 0 10px rgba(0,255,156,0.1);
-  color: #00ff9c;
-  font-weight: 800;
-  transition: transform 0.25s, box-shadow 0.25s;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0,255,156,0.3);
+.big-stat:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 40px rgba(0,255,156,.5);
 }
 
-.stat-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 255, 156, 0.6), inset 0 0 15px rgba(0,255,156,0.2);
+.big-stat h2{
+margin:0;
+font-size:42px;
+color:#00ff9c;
 }
 
-.stat-card h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 20px;
-  text-align: center;
-  text-shadow: 0 0 12px #00ff9c;
+.big-stat span{
+font-size:13px;
+letter-spacing:2px;
+opacity:.8;
 }
 
-.stat-card p {
-  margin: 6px 0;
-  font-size: 15px;
-  text-align: center;
+/* CATEGORY GRID */
+
+.stat-sections{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+/* CATEGORY CARD */
+
+.section{
+background:rgba(10,14,18,.85);
+border-radius:18px;
+padding:25px;
+border:1px solid rgba(0,255,156,.25);
+box-shadow:0 8px 30px rgba(0,255,156,.2);
+backdrop-filter:blur(8px);
+}
+
+.section h3{
+margin-top:0;
+margin-bottom:20px;
+font-size:20px;
+color:#00ff9c;
+text-shadow:0 0 10px #00ff9c;
+}
+
+/* STAT GRID */
+
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+/* SMALL STAT TILE */
+
+.stat{
+background:rgba(0,0,0,.35);
+border-radius:10px;
+padding:14px;
+text-align:center;
+}
+
+.stat-value{
+font-size:20px;
+color:#00ff9c;
+font-weight:800;
+}
+
+.stat-label{
+font-size:11px;
+opacity:.7;
+letter-spacing:1px;
 }
 
 /* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  opacity: .5;
-  padding: 15px;
-  position: relative;
-  z-index: 1;
+
+.footer{
+text-align:center;
+font-size:12px;
+opacity:.5;
+padding:20px;
+margin-top:40px;
 }
 
-.footer:hover {
-  opacity: .9;
-  text-shadow: 0 0 10px #00ff9c;
-}
 </style>
 </head>
 
@@ -164,117 +204,238 @@ body {
 <div class="background"></div>
 <div class="overlay"></div>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
+
 <div class="nav">
-  <a href="/">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <path d="M12 3l10 9h-3v9h-6v-6h-2v6H5v-9H2z"/>
-    </svg>
-    Home
-  </a>
+
+<a href="/">
+
+<svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path d="M3 11L12 4l9 7"/>
+<path d="M5 10v10h14V10"/>
+</svg>
+
+</a>
+
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="title" id="playerNameTitle">Player Name</div>
 
-  <div class="stats-container">
+<div class="title" id="playerNameTitle">Player</div>
 
-    <!-- GENERAL STATS CARD -->
-    <div class="stat-card" id="generalStats">
-      <h3>General Stats</h3>
-      <p>Username: <span id="username">Player123</span></p>
-      <p>Score: <span id="score">0</span></p>
-      <p>Matches Played: <span id="matches">0</span></p>
-      <p>Kills: <span id="kills">0</span></p>
-      <p>Deaths: <span id="deaths">0</span></p>
-      <p>K/D Ratio: <span id="kd">0</span></p>
-    </div>
+<!-- TOP STATS -->
 
-    <!-- PERFORMANCE STATS CARD -->
-    <div class="stat-card" id="performanceStats">
-      <h3>Performance</h3>
-      <p>Wins: <span id="wins">0</span></p>
-      <p>Losses: <span id="losses">0</span></p>
-      <p>Longest Streak: <span id="streak">0</span></p>
-      <p>Total Time Played: <span id="timePlayed">0h</span></p>
-      <p>Extraction Rate: <span id="extraction">0%</span></p>
-    </div>
+<div class="top-stats">
 
-    <!-- WEAPON STATS CARD -->
-    <div class="stat-card" id="weaponStats">
-      <h3>Weapons</h3>
-      <p>Top Weapon: <span id="topWeapon">None</span></p>
-      <p>Favorite Weapon: <span id="favWeapon">None</span></p>
-    </div>
+<div class="big-stat">
+<h2 id="kd">0</h2>
+<span>K/D RATIO</span>
+</div>
 
-    <!-- MAP STATS CARD -->
-    <div class="stat-card" id="mapStats">
-      <h3>Maps</h3>
-      <p>Favorite Map: <span id="favoriteMap">None</span></p>
-      <p>Perimeter Matches: <span id="perimeter">0</span></p>
-      <p>Dire Marsh Matches: <span id="direMarsh">0</span></p>
-      <p>Outpost Matches: <span id="outpost">0</span></p>
-    </div>
+<div class="big-stat">
+<h2 id="matches">0</h2>
+<span>MATCHES</span>
+</div>
 
-  </div>
+<div class="big-stat">
+<h2 id="wins">0</h2>
+<span>WINS</span>
+</div>
+
+<div class="big-stat">
+<h2 id="extraction">0%</h2>
+<span>EXTRACTION RATE</span>
+</div>
+
+</div>
+
+<!-- STAT SECTIONS -->
+
+<div class="stat-sections">
+
+<!-- COMBAT -->
+
+<div class="section">
+
+<h3>Combat</h3>
+
+<div class="stat-grid">
+
+<div class="stat">
+<div class="stat-value" id="kills">0</div>
+<div class="stat-label">Kills</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="deaths">0</div>
+<div class="stat-label">Deaths</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="score">0</div>
+<div class="stat-label">Score</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="streak">0</div>
+<div class="stat-label">Best Streak</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- PERFORMANCE -->
+
+<div class="section">
+
+<h3>Performance</h3>
+
+<div class="stat-grid">
+
+<div class="stat">
+<div class="stat-value" id="losses">0</div>
+<div class="stat-label">Losses</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="timePlayed">0h</div>
+<div class="stat-label">Time Played</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="perimeter">0</div>
+<div class="stat-label">Perimeter</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="direMarsh">0</div>
+<div class="stat-label">Dire Marsh</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- WEAPONS -->
+
+<div class="section">
+
+<h3>Weapons</h3>
+
+<div class="stat-grid">
+
+<div class="stat">
+<div class="stat-value" id="topWeapon">None</div>
+<div class="stat-label">Top Weapon</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="favWeapon">None</div>
+<div class="stat-label">Favorite Weapon</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- MAPS -->
+
+<div class="section">
+
+<h3>Maps</h3>
+
+<div class="stat-grid">
+
+<div class="stat">
+<div class="stat-value" id="favoriteMap">None</div>
+<div class="stat-label">Favorite Map</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="outpost">0</div>
+<div class="stat-label">Outpost Matches</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 <div class="footer">
-  Not affiliated with Bungie.
+Not affiliated with Bungie.
 </div>
 
-<script src="app.js"></script>
 <script>
-// Populate stats
-function displayPlayerStats(playerData) {
-  document.getElementById('playerNameTitle').textContent = playerData.username;
 
-  // General
-  document.getElementById('username').textContent = playerData.username;
-  document.getElementById('score').textContent = playerData.score;
-  document.getElementById('matches').textContent = playerData.matches;
-  document.getElementById('kills').textContent = playerData.kills;
-  document.getElementById('deaths').textContent = playerData.deaths;
-  document.getElementById('kd').textContent = (playerData.kills / Math.max(playerData.deaths,1)).toFixed(2);
+function displayPlayerStats(playerData){
 
-  // Performance
-  document.getElementById('wins').textContent = playerData.wins;
-  document.getElementById('losses').textContent = playerData.losses;
-  document.getElementById('streak').textContent = playerData.longestStreak;
-  document.getElementById('timePlayed').textContent = playerData.totalTimePlayed + 'h';
-  document.getElementById('extraction').textContent = playerData.extractionRate + '%';
+document.getElementById('playerNameTitle').textContent = playerData.username;
 
-  // Weapons
-  document.getElementById('topWeapon').textContent = playerData.topWeapon;
-  document.getElementById('favWeapon').textContent = playerData.favoriteWeapon;
+document.getElementById('score').textContent = playerData.score;
+document.getElementById('matches').textContent = playerData.matches;
+document.getElementById('kills').textContent = playerData.kills;
+document.getElementById('deaths').textContent = playerData.deaths;
 
-  // Maps
-  document.getElementById('favoriteMap').textContent = playerData.favoriteMap;
-  document.getElementById('perimeter').textContent = playerData.perimeterMatches;
-  document.getElementById('direMarsh').textContent = playerData.direMarshMatches;
-  document.getElementById('outpost').textContent = playerData.outpostMatches;
+document.getElementById('kd').textContent =
+(playerData.kills/Math.max(playerData.deaths,1)).toFixed(2);
+
+document.getElementById('wins').textContent = playerData.wins;
+document.getElementById('losses').textContent = playerData.losses;
+document.getElementById('streak').textContent = playerData.longestStreak;
+
+document.getElementById('timePlayed').textContent =
+playerData.totalTimePlayed + "h";
+
+document.getElementById('extraction').textContent =
+playerData.extractionRate + "%";
+
+document.getElementById('topWeapon').textContent =
+playerData.topWeapon;
+
+document.getElementById('favWeapon').textContent =
+playerData.favoriteWeapon;
+
+document.getElementById('favoriteMap').textContent =
+playerData.favoriteMap;
+
+document.getElementById('perimeter').textContent =
+playerData.perimeterMatches;
+
+document.getElementById('direMarsh').textContent =
+playerData.direMarshMatches;
+
+document.getElementById('outpost').textContent =
+playerData.outpostMatches;
+
 }
 
-// Example dummy data
+/* Example data */
+
 displayPlayerStats({
-  username: "Runner123",
-  score: 15200,
-  kills: 256,
-  deaths: 120,
-  matches: 45,
-  wins: 20,
-  losses: 25,
-  topWeapon: "Bolt Rifle",
-  favoriteWeapon: "Laser Rifle",
-  favoriteMap: "Perimeter",
-  extractionRate: 78,
-  longestStreak: 12,
-  totalTimePlayed: 85,
-  perimeterMatches: 15,
-  direMarshMatches: 18,
-  outpostMatches: 12
+
+username:"Runner123",
+score:15200,
+kills:256,
+deaths:120,
+matches:45,
+wins:20,
+losses:25,
+topWeapon:"Bolt Rifle",
+favoriteWeapon:"Laser Rifle",
+favoriteMap:"Perimeter",
+extractionRate:78,
+longestStreak:12,
+totalTimePlayed:85,
+perimeterMatches:15,
+direMarshMatches:18,
+outpostMatches:12
+
 });
+
 </script>
 
 </body>
