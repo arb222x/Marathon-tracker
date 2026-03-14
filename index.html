@@ -15,62 +15,57 @@ body{
 margin:0;
 font-family:'Orbitron',sans-serif;
 color:white;
-overflow-x:hidden;
 }
 
-/* NAV */
+/* NAV BAR */
+
 .nav{
 position:absolute;
 top:30px;
 left:40px;
+display:flex;
+align-items:center;
+gap:25px;
 z-index:5;
 }
 
-.home-btn{
-position:relative;
+.nav a{
 display:flex;
 align-items:center;
+gap:8px;
+text-decoration:none;
+color:white;
+font-size:14px;
+letter-spacing:1px;
 }
 
-.home-btn svg{
-width:32px;
-height:32px;
-stroke:white;
-transition:.25s;
-}
-
-.home-btn:hover svg{
-stroke:#00ff9c;
-filter:drop-shadow(0 0 8px #00ff9c);
-}
-
-/* TOOLTIP */
-.home-btn::after{
-content:"Home";
-position:absolute;
-top:42px;
-left:50%;
-transform:translateX(-50%);
-background:#0b0f14;
+.nav a:hover{
 color:#00ff9c;
-font-size:12px;
-padding:4px 8px;
-border-radius:6px;
-opacity:0;
-transition:.2s;
-white-space:nowrap;
 }
 
-.home-btn:hover::after{
-opacity:1;
+/* HOME ICON */
+
+.home-icon{
+width:26px;
+height:26px;
+stroke:white;
+fill:none;
+stroke-width:2;
+transition:.2s;
+}
+
+.nav a:hover .home-icon{
+stroke:#00ff9c;
+filter:drop-shadow(0 0 6px #00ff9c);
 }
 
 /* HERO */
+
 .hero{
 display:flex;
 flex-direction:column;
 align-items:center;
-margin-top:160px;
+margin-top:180px;
 }
 
 .title{
@@ -81,6 +76,7 @@ text-shadow:0 0 30px #00ff9c;
 }
 
 /* SEARCH */
+
 .search-container{
 margin-top:120px;
 }
@@ -90,23 +86,25 @@ display:flex;
 background:#0b0f14;
 border-radius:10px;
 overflow:hidden;
-box-shadow:0 0 20px rgba(0,255,156,.3);
+box-shadow:0 0 20px rgba(0,255,156,.25);
+transition:.25s;
 }
 
 .search-box input{
-padding:15px 18px;
-width:300px;
+padding:16px 20px;
+width:320px;
 border:none;
 background:transparent;
 color:white;
 outline:none;
 font-family:'Orbitron',sans-serif;
+font-size:14px;
 }
 
 .search-box button{
 background:#00ff9c;
 border:none;
-padding:15px 22px;
+padding:16px 25px;
 font-weight:800;
 cursor:pointer;
 }
@@ -115,7 +113,20 @@ cursor:pointer;
 box-shadow:0 0 10px #00ff9c;
 }
 
+/* ERROR */
+
+.error{
+box-shadow:0 0 25px #ff4d4d !important;
+}
+
+/* SUCCESS */
+
+.success{
+box-shadow:0 0 25px #00ff9c !important;
+}
+
 /* FOOTER */
+
 .footer{
 position:fixed;
 bottom:20px;
@@ -134,16 +145,24 @@ opacity:.5;
 <div class="background"></div>
 <div class="overlay"></div>
 
-<div class="nav">
-<a href="/" class="home-btn">
+<!-- NAV -->
 
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-<path stroke-linecap="round" stroke-linejoin="round"
-d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
+<div class="nav">
+
+<a href="/">
+
+<svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path d="M3 11L12 4l9 7"/>
+<path d="M5 10v10h14V10"/>
 </svg>
 
 </a>
+
+<a href="/recent.html">Recent Runners</a>
+
 </div>
+
+<!-- HERO -->
 
 <div class="hero">
 
@@ -151,9 +170,13 @@ d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
 
 <div class="search-container">
 
-<div class="search-box">
+<div class="search-box" id="searchBox">
 
-<input id="runnerInput" placeholder="Enter runner name">
+<input
+id="runnerInput"
+placeholder="Enter runner name"
+onkeypress="if(event.key==='Enter'){searchRunner()}"
+>
 
 <button onclick="searchRunner()">Search</button>
 
@@ -169,24 +192,61 @@ Not affiliated with Bungie.
 
 <script>
 
-function searchRunner(){
+async function searchRunner(){
 
 const input=document.getElementById("runnerInput");
+const box=document.getElementById("searchBox");
+
+box.classList.remove("error","success");
+
 const name=input.value.trim();
 
 if(name==="") return;
 
+try{
+
+/* Bungie API call */
+
+const res = await fetch(
+`https://www.bungie.net/Platform/User/Search/GlobalName/0/${name}/`,
+{
+headers:{
+"X-API-Key":"YOUR_API_KEY_HERE"
+}
+}
+);
+
+const data = await res.json();
+
+if(data.Response && data.Response.searchResults.length>0){
+
+box.classList.add("success");
+
+/* save recent */
+
 let recent=JSON.parse(localStorage.getItem("recentRunners"))||[];
 
-if(!recent.includes(name)){
-recent.unshift(name);
-}
+if(!recent.includes(name)) recent.unshift(name);
 
 recent=recent.slice(0,10);
 
 localStorage.setItem("recentRunners",JSON.stringify(recent));
 
+setTimeout(()=>{
 window.location.href=`player.html?name=${name}`;
+},400);
+
+}else{
+
+box.classList.add("error");
+
+}
+
+}catch{
+
+box.classList.add("error");
+
+}
 
 }
 
