@@ -11,56 +11,102 @@
 
 <style>
 
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+color:white;
+}
+
+/* NAV */
+.nav{
+position:absolute;
+top:30px;
+left:40px;
+}
+
+.home-btn{
+position:relative;
+display:flex;
+align-items:center;
+}
+
+.home-btn svg{
+width:32px;
+height:32px;
+stroke:white;
+transition:.25s;
+}
+
+.home-btn:hover svg{
+stroke:#00ff9c;
+filter:drop-shadow(0 0 8px #00ff9c);
+}
+
+/* TOOLTIP */
+.home-btn::after{
+content:"Home";
+position:absolute;
+top:42px;
+left:50%;
+transform:translateX(-50%);
+background:#0b0f14;
+color:#00ff9c;
+font-size:12px;
+padding:4px 8px;
+border-radius:6px;
+opacity:0;
+transition:.2s;
+white-space:nowrap;
+}
+
+.home-btn:hover::after{
+opacity:1;
+}
+
+/* HERO */
 .hero{
 display:flex;
 flex-direction:column;
 align-items:center;
-margin-top:140px;
-gap:40px;
+margin-top:150px;
 }
 
 .title{
-font-size:64px;
+font-size:60px;
 letter-spacing:6px;
 color:#00ff9c;
-text-shadow:0 0 25px #00ff9c,0 0 40px #00ff9c;
+text-shadow:0 0 30px #00ff9c;
 }
 
 .recent-container{
+margin-top:60px;
 display:flex;
 flex-direction:column;
 gap:15px;
-width:90%;
-max-width:420px;
-margin-top:40px;
+width:350px;
 }
 
 .runner-box{
-background:rgba(11,15,20,.85);
-border-radius:12px;
-padding:16px 22px;
+background:#0b0f14;
+padding:15px;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+box-shadow:0 0 20px rgba(0,255,156,.2);
 color:#00ff9c;
 font-weight:800;
-text-align:center;
-font-size:16px;
-box-shadow:0 0 20px rgba(0,255,156,.3);
-cursor:pointer;
-transition:.2s;
 }
 
 .runner-box:hover{
-transform:translateY(-3px);
 box-shadow:0 0 25px #00ff9c;
 }
 
 .no-runners{
-background:rgba(30,0,0,.85);
-border-radius:12px;
-padding:16px 22px;
-color:#ff4d4d;
-font-weight:800;
+background:#220000;
+padding:15px;
+border-radius:10px;
 text-align:center;
-box-shadow:0 0 15px rgba(255,77,77,.4);
+color:#ff4d4d;
 }
 
 .footer{
@@ -82,16 +128,15 @@ opacity:.5;
 <div class="overlay"></div>
 
 <div class="nav">
+<a href="/" class="home-btn">
 
-<a href="/" title="Home">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+<path stroke-linecap="round" stroke-linejoin="round"
+d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
 
-<!-- SAME PROFESSIONAL ICON -->
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
-<path stroke-linecap="round" stroke-linejoin="round" d="M3 10.75L12 4l9 6.75M5 10v9h14v-9"/>
 </svg>
 
 </a>
-
 </div>
 
 <div class="hero">
@@ -106,36 +151,30 @@ opacity:.5;
 Not affiliated with Bungie.
 </div>
 
-<script src="app.js"></script>
-
 <script>
-
-let recentRunners=[];
 
 const container=document.getElementById("recentContainer");
 
-function renderRecentRunners(){
+let recent=JSON.parse(localStorage.getItem("recentRunners"))||[];
 
-container.innerHTML='';
+if(recent.length===0){
 
-if(recentRunners.length===0){
+const empty=document.createElement("div");
+empty.className="no-runners";
+empty.textContent="No recent searches";
 
-const noRunners=document.createElement('div');
-noRunners.className='no-runners';
-noRunners.textContent="No recent searches";
-
-container.appendChild(noRunners);
+container.appendChild(empty);
 
 }else{
 
-recentRunners.forEach(runner=>{
+recent.forEach(name=>{
 
-const box=document.createElement('div');
-box.className='runner-box';
-box.textContent=runner;
+const box=document.createElement("div");
+box.className="runner-box";
+box.textContent=name;
 
 box.onclick=()=>{
-window.location.href=`player.html?name=${runner}`;
+window.location.href=`player.html?name=${name}`;
 };
 
 container.appendChild(box);
@@ -143,10 +182,6 @@ container.appendChild(box);
 });
 
 }
-
-}
-
-renderRecentRunners();
 
 </script>
 
